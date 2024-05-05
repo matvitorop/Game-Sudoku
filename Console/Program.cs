@@ -1,5 +1,5 @@
 ﻿using MongoDB.Driver;
-
+using Classes;
 //string connectionString = "mongodb://localhost:27017";
 //
 //var client = new MongoClient(connectionString);
@@ -125,11 +125,28 @@ int[,] GenerateSudoku()
 int[,] sudokuBoard = GenerateSudoku();
 
 
-for (int i = 0; i < 9; i++)
+//for (int i = 0; i < 9; i++)
+//{
+//    for (int j = 0; j < 9; j++)
+//    {
+//        Console.Write(sudokuBoard[i, j] + " ");
+//    }
+//    Console.WriteLine();
+//}
+
+
+Sudoku big = new SudokuBig(10);
+Sudoku sm = new SudokuSmall(10);
+Sudoku med = new SudokuMedium(10);
+med.GenerateSudoku();
+big.GenerateSudoku();
+sm.GenerateSudoku();
+
+for (int i = 0; i < 16; i++)
 {
-    for (int j = 0; j < 9; j++)
+    for (int j = 0; j < 16; j++)
     {
-        Console.Write(sudokuBoard[i, j] + " ");
+        Console.Write(big.sudokuTable[i, j] + " ");
     }
     Console.WriteLine();
 }
