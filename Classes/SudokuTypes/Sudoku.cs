@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Drawing;
+using Classes.Visitor;
 
-namespace Classes
+namespace Classes.SudokuTypes
 {
     public abstract class Sudoku
     {
         Random random = new Random();
 
         public int[] calculationArray;
-        
+
         public int[,] sudokuTable;
-        
+
         public int fillingDensity;
+
         int size;
 
         public int blockSize;
 
-        public Sudoku(int fillDens) 
+        public Sudoku(int fillDens)
         {
             fillingDensity = fillDens;
         }
@@ -36,7 +38,7 @@ namespace Classes
                 }
             }
 
-            
+
             int startRow = row / blockSize * blockSize;
             int startCol = col / blockSize * blockSize;
 
@@ -59,7 +61,7 @@ namespace Classes
             size = sudokuTable.GetLength(0);
 
             List<int> numbers = Enumerable.Range(1, size).ToList();
-            
+
             Shuffle(numbers);
 
             for (int i = 0; i < size; i++)

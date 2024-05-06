@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Classes.Visitor;
 
-namespace Classes
+namespace Classes.SudokuTypes
 {
-    public class SudokuMedium: Sudoku
+    public class SudokuMedium : Sudoku
     {
         public SudokuMedium(int fillDense) : base(fillDense)
         {

@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Classes.SudokuTypes;
 
-namespace Classes
+namespace Classes.Factory
 {
-    public class HardFactory : ISudokuFactory
+    public class NormalFactory : ISudokuFactory
     {
         public Sudoku CreateBigSudoku()
         {
-            return new SudokuBig(50);
+            return new SudokuBig(35);
         }
 
         public Sudoku CreateMediumSudoku()
         {
-            return new SudokuMedium(50);
+            return new SudokuMedium(35);
         }
 
         public Sudoku CreateSmallSudoku()
         {
-            return new SudokuSmall(50);
+            return new SudokuSmall(35);
         }
     }
 }
