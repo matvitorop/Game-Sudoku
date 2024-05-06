@@ -11,7 +11,7 @@ namespace Classes.SudokuTypes
 
         public int[] calculationArray;
 
-        public int[,] sudokuTable;
+        public int[,] sudokuTable { get; set; }
 
         public int fillingDensity;
 
