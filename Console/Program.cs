@@ -150,3 +150,13 @@ for (int i = 0; i < 16; i++)
     }
     Console.WriteLine();
 }
+
+Console.WriteLine();
+
+IVisitor visitor = new SudokuVisitor();
+
+ISudokuFactory fabrick = new NormalFactory();
+
+var newSudoku = fabrick.CreateMediumSudoku();
+
+newSudoku.Accept(visitor);

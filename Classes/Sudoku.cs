@@ -6,6 +6,7 @@ namespace Classes
     public abstract class Sudoku
     {
         Random random = new Random();
+
         public int[] calculationArray;
         
         public int[,] sudokuTable;
@@ -126,5 +127,7 @@ namespace Classes
             }
             return false;
         }
+
+        public abstract void Accept(IVisitor visitor);
     }
 }

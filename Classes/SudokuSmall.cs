@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Classes
 {
-    public class SudokuSmall: Sudoku, ISudokuVisitable
+    public class SudokuSmall: Sudoku
     {
         public SudokuSmall(int fillDense) : base(fillDense) 
         {
             sudokuTable = new int[4,4];
             blockSize = 2;
         }
-        public void Accept(IVisitor visitor)
+        public override void Accept(IVisitor visitor)
         {
             visitor.FillAndPrep(this);
         }
