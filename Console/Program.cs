@@ -4,6 +4,7 @@ using Classes.Factory;
 using Classes.Visitor;
 using Classes.SudokuTypes;
 using Classes.Memento;
+using System.Security.AccessControl;
 //string connectionString = "mongodb://localhost:27017";
 //
 //var client = new MongoClient(connectionString);
@@ -139,13 +140,12 @@ using Classes.Memento;
 //}
 
 
-Sudoku big = new SudokuBig(10);
-Sudoku sm = new SudokuSmall(10);
-Sudoku med = new SudokuMedium(10);
-med.GenerateSudoku();
-big.GenerateSudoku();
-sm.GenerateSudoku();
-IVisitor visitor = new SudokuVisitor();
+//Sudoku big = new SudokuBig(10);
+//Sudoku sm = new SudokuSmall(10);
+//Sudoku med = new SudokuMedium(10);
+//med.GenerateSudoku();
+//big.GenerateSudoku();
+//sm.GenerateSudoku();
 
 //for (int i = 0; i < 16; i++)
 //{
@@ -157,14 +157,31 @@ IVisitor visitor = new SudokuVisitor();
 //}
 
 
-ISudokuFactory fabrick = new NormalFactory();
 
+//==================================ТЕСТУВАННЯ ФАБРИКИ СУДОКУ ЗА СКЛАДНІСТЮ (МАЛО ЧИ БАГАТО КЛІТИНОК ЗАПОВНЕНО)==================================
+ISudokuFactory fabrick = new NormalFactory();
 var newSudoku = fabrick.CreateMediumSudoku();
 
+//==================================СТВОРЕННЯ VISITOR ДЛЯ ПІДГОТОВКИ СУДОКУ ДЛЯ ГРИ==================================
+IVisitor visitor = new SudokuVisitor();
 newSudoku.Accept(visitor);
-
 var MediumSudoku = fabrick.CreateMediumSudoku();
 
+//==================================ТЕСТУВАННЯ ЗБЕРІГАННЯ СНАПШОТІВ СТАНУ СУДОКУ==================================
 SudokuCaretaker caretaker = new SudokuCaretaker(MediumSudoku);
 caretaker.SaveBackup();
 
+//==================================ТЕСТУВАННЯ ОДИНАКА-ГЕНЕРАТОРА СУДОКУ==================================
+var generator = SudokuGenerator.Instance;
+
+generator.SetSudoku(MediumSudoku);
+generator.GenerateSudoku();
+
+for (int i = 0; i < 9; i++)
+{
+    for (int j = 0; j < 9; j++)
+    {
+        Console.Write(MediumSudoku.sudokuTable[i, j] + " ");
+    }
+    Console.WriteLine();
+}
