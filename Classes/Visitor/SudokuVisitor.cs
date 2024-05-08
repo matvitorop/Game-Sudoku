@@ -20,7 +20,15 @@ namespace Classes.Visitor
             {
                 int row = random.Next(size);
                 int col = random.Next(size);
-                sudoku.sudokuTable[row, col] = 0;
+                if(sudoku.sudokuTable[row, col] != 0)
+                {
+                    sudoku.sudokuTable[row, col] = 0;
+                }
+                else
+                {
+                    continue;
+                }
+                
             }
         }
 

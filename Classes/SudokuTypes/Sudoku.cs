@@ -40,6 +40,6 @@ namespace Classes.SudokuTypes
                 throw new ArgumentException("Wrong type of snapshot");
             }
         }
-
+        
     }
 }

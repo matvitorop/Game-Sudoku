@@ -145,8 +145,54 @@ namespace Classes.SudokuTypes
             }
             return false;
         }
-            
-        
-    
+
+        public bool ValidateSudoku()
+        {
+            int sudokuLength = sudokuToChange.sudokuTable.GetLength(0);
+
+            for (int cell_i = 0; cell_i < sudokuLength; cell_i++)
+            {
+                int row = cell_i;
+
+                for (int cell_j = 0; cell_j < sudokuLength; cell_j++)
+                {
+                    int col = cell_j;
+
+                    int value = sudokuToChange.sudokuTable[cell_i, cell_j];
+                    
+                    if(value == 0)
+                    {
+                        //Console.WriteLine("1");
+                        return false;
+                    }
+
+                    for (int i = 0; i < sudokuLength; i++)
+                    {
+                        if (sudokuToChange.sudokuTable[row, i] == value && row != cell_i && i!=cell_j || sudokuToChange.sudokuTable[i, col] == value && i != cell_i && col != cell_j)
+                        {
+                            //Console.WriteLine($"2, {cell_i}, {cell_j}");
+                            return false;
+                        }
+                    }
+
+                    int startRow = row / sudokuToChange.blockSize * sudokuToChange.blockSize;
+                    int startCol = col / sudokuToChange.blockSize * sudokuToChange.blockSize;
+
+                    for (int i = startRow; i < startRow + sudokuToChange.blockSize; i++)
+                    {
+                        for (int j = startCol; j < startCol + sudokuToChange.blockSize; j++)
+                        {
+                            if (sudokuToChange.sudokuTable[i, j] == value && i!= cell_i && j!=cell_j)
+                            {
+                                //Console.WriteLine("3");
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
     }
 }
