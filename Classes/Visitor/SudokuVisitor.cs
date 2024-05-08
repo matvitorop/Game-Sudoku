@@ -9,19 +9,34 @@ namespace Classes.Visitor
 {
     public class SudokuVisitor : IVisitor
     {
-        public void FillAndPrep(SudokuSmall visitor)
+        private Random random = new Random();
+        public void MakeCellsEmpty(Sudoku sudoku,int percentEmpty)
         {
-            Console.WriteLine("Checking small sudoku");
+            int size = sudoku.sudokuTable.GetLength(0);
+            int totalCells = size * size;
+            int cellsToEmpty = (int)(totalCells * (percentEmpty / 100.0));
+
+            for (int i = 0; i < cellsToEmpty; i++)
+            {
+                int row = random.Next(size);
+                int col = random.Next(size);
+                sudoku.sudokuTable[row, col] = 0;
+            }
         }
 
-        public void FillAndPrep(SudokuMedium visitor)
+        public void SudokuPrep(SudokuSmall visitor)
         {
-            Console.WriteLine("Checking medium sudoku");
+            MakeCellsEmpty(visitor, visitor.fillingDensity);
         }
 
-        public void FillAndPrep(SudokuBig visitor)
+        public void SudokuPrep(SudokuMedium visitor)
         {
-            Console.WriteLine("Checking big sudoku");
+            MakeCellsEmpty(visitor, visitor.fillingDensity);
+        }
+
+        public void SudokuPrep(SudokuBig visitor)
+        {
+            MakeCellsEmpty(visitor, visitor.fillingDensity);
         }
     }
 }

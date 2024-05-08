@@ -16,7 +16,7 @@ namespace Classes.SudokuTypes
         }
         public override void Accept(IVisitor visitor)
         {
-            visitor.FillAndPrep(this);
+            visitor.SudokuPrep(this);
         }
     }
 }

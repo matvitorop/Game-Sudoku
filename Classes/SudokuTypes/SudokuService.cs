@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace Classes.SudokuTypes
 {
-    sealed public class SudokuGenerator
+    sealed public class SudokuService
     {
-        private static SudokuGenerator _instance;
+        private static SudokuService _instance;
         private Random random = new Random();
         private Sudoku sudokuToChange;
 
-        private SudokuGenerator()
+        private SudokuService()
         {
             // Приватний конструктор для запобігання створенню екземплярів ззовні.
         }
 
-        public static SudokuGenerator Instance
+        public static SudokuService Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = new SudokuGenerator();
+                    _instance = new SudokuService();
                 }
                 return _instance;
             }
@@ -38,6 +38,11 @@ namespace Classes.SudokuTypes
         public void GenerateSudoku()
         {
             FillFirstRow();
+            FillRemaining();
+        }
+
+        public void RecoveringCells()
+        {
             FillRemaining();
         }
 
@@ -140,5 +145,8 @@ namespace Classes.SudokuTypes
             }
             return false;
         }
+            
+        
+    
     }
 }

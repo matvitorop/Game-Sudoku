@@ -24,7 +24,6 @@ namespace Classes.SudokuTypes
         }
 
         public abstract void Accept(IVisitor visitor);
-        
         public ISnapshot Save()
         {
             return new SudokuSnapshot(sudokuTable);

@@ -162,6 +162,8 @@ using System.Security.AccessControl;
 ISudokuFactory fabrick = new NormalFactory();
 var newSudoku = fabrick.CreateMediumSudoku();
 
+ISudokuFactory second_fabrick = new HardFactory();
+var hardSudoku = second_fabrick.CreateMediumSudoku();
 //==================================СТВОРЕННЯ VISITOR ДЛЯ ПІДГОТОВКИ СУДОКУ ДЛЯ ГРИ==================================
 IVisitor visitor = new SudokuVisitor();
 newSudoku.Accept(visitor);
@@ -172,7 +174,7 @@ SudokuCaretaker caretaker = new SudokuCaretaker(MediumSudoku);
 caretaker.SaveBackup();
 
 //==================================ТЕСТУВАННЯ ОДИНАКА-ГЕНЕРАТОРА СУДОКУ==================================
-var generator = SudokuGenerator.Instance;
+var generator = SudokuService.Instance;
 
 generator.SetSudoku(MediumSudoku);
 generator.GenerateSudoku();
@@ -185,3 +187,20 @@ for (int i = 0; i < 9; i++)
     }
     Console.WriteLine();
 }
+
+MediumSudoku.Accept(visitor);
+Console.WriteLine();
+
+for (int i = 0; i < 9; i++)
+{
+    for (int j = 0; j < 9; j++)
+    {
+        Console.Write(MediumSudoku.sudokuTable[i, j] + " ");
+    }
+    Console.WriteLine();
+}
+
+
+
+
+
