@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Classes.Visitor;
+using Classes.Memento;
 
 namespace Classes.SudokuTypes
 {
@@ -10,7 +11,7 @@ namespace Classes.SudokuTypes
 
         public int[] calculationArray;
 
-        public int[,] sudokuTable;
+        public int[,] sudokuTable { get; set; }
 
         public int fillingDensity;
 
@@ -22,6 +23,7 @@ namespace Classes.SudokuTypes
         {
             fillingDensity = fillDens;
         }
+        
         public void GenerateSudoku()
         {
             FillFirstRow();
@@ -131,5 +133,23 @@ namespace Classes.SudokuTypes
         }
 
         public abstract void Accept(IVisitor visitor);
+        
+        public ISnapshot Save()
+        {
+            return new SudokuSnapshot(sudokuTable);
+        }
+        public void Restore(ISnapshot snapshot)
+        {
+            if (snapshot is SudokuSnapshot)
+            {
+                var memento = (SudokuSnapshot)snapshot;
+                sudokuTable = memento.GetState();
+            }
+            else
+            {
+                throw new ArgumentException("Wrong type of snapshot");
+            }
+        }
+
     }
 }

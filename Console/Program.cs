@@ -3,6 +3,7 @@ using Classes;
 using Classes.Factory;
 using Classes.Visitor;
 using Classes.SudokuTypes;
+using Classes.Memento;
 //string connectionString = "mongodb://localhost:27017";
 //
 //var client = new MongoClient(connectionString);
@@ -161,3 +162,9 @@ ISudokuFactory fabrick = new NormalFactory();
 var newSudoku = fabrick.CreateMediumSudoku();
 
 newSudoku.Accept(visitor);
+
+var MediumSudoku = fabrick.CreateMediumSudoku();
+
+SudokuCaretaker caretaker = new SudokuCaretaker(MediumSudoku);
+caretaker.SaveBackup();
+
