@@ -28,47 +28,54 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            bt_backup = new Button();
+            bt_save = new Button();
+            bt_check = new Button();
             bt_start = new Button();
             SuspendLayout();
             // 
-            // button1
+            // bt_backup
             // 
-            button1.Location = new Point(492, 196);
-            button1.Name = "button1";
-            button1.Size = new Size(95, 43);
-            button1.TabIndex = 0;
-            button1.Text = "Назад";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            bt_backup.Enabled = false;
+            bt_backup.Font = new Font("Modern No. 20", 14.25F, FontStyle.Bold);
+            bt_backup.Location = new Point(495, 271);
+            bt_backup.Name = "bt_backup";
+            bt_backup.Size = new Size(189, 79);
+            bt_backup.TabIndex = 0;
+            bt_backup.Text = "Повернутись до останнього збереження";
+            bt_backup.UseVisualStyleBackColor = true;
+            bt_backup.Click += bt_backup_Click;
             // 
-            // button2
+            // bt_save
             // 
-            button2.Location = new Point(606, 196);
-            button2.Name = "button2";
-            button2.Size = new Size(95, 43);
-            button2.TabIndex = 1;
-            button2.Text = "Вперед";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            bt_save.Enabled = false;
+            bt_save.Font = new Font("Modern No. 20", 14.25F, FontStyle.Bold);
+            bt_save.Location = new Point(527, 203);
+            bt_save.Name = "bt_save";
+            bt_save.Size = new Size(118, 51);
+            bt_save.TabIndex = 1;
+            bt_save.Text = "Зберегти";
+            bt_save.UseVisualStyleBackColor = true;
+            bt_save.Click += bt_save_Click;
             // 
-            // button3
+            // bt_check
             // 
-            button3.Location = new Point(546, 265);
-            button3.Name = "button3";
-            button3.Size = new Size(105, 42);
-            button3.TabIndex = 2;
-            button3.Text = "Закінчити (перевірити)";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            bt_check.Enabled = false;
+            bt_check.Font = new Font("Modern No. 20", 14.25F, FontStyle.Bold);
+            bt_check.Location = new Point(598, 133);
+            bt_check.Name = "bt_check";
+            bt_check.Size = new Size(118, 51);
+            bt_check.TabIndex = 2;
+            bt_check.Text = "Закінчити (перевірити)";
+            bt_check.UseVisualStyleBackColor = true;
+            bt_check.Click += button3_Click;
             // 
             // bt_start
             // 
-            bt_start.Location = new Point(546, 140);
+            bt_start.Font = new Font("Modern No. 20", 14.25F, FontStyle.Bold);
+            bt_start.Location = new Point(458, 133);
             bt_start.Name = "bt_start";
-            bt_start.Size = new Size(105, 35);
+            bt_start.Size = new Size(118, 51);
             bt_start.TabIndex = 3;
             bt_start.Text = "Почати";
             bt_start.UseVisualStyleBackColor = true;
@@ -78,13 +85,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(0, 192, 192);
-            ClientSize = new Size(710, 469);
+            BackColor = Color.DarkGoldenrod;
+            ClientSize = new Size(728, 469);
             Controls.Add(bt_start);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(bt_check);
+            Controls.Add(bt_save);
+            Controls.Add(bt_backup);
             Name = "Playing";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "This is Sudoku!";
             FormClosing += Playing_FormClosing;
             ResumeLayout(false);
@@ -92,9 +100,9 @@
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private Button bt_backup;
+        private Button bt_save;
+        private Button bt_check;
         private Button bt_start;
     }
 }

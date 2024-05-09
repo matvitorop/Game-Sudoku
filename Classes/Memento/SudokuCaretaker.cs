@@ -23,11 +23,19 @@ namespace Classes.Memento
             mementos.Add(_sudoku.Save());
         }
 
-        public void Restore()
+        public bool Restore()
         {
-            var snapshot = mementos.Last();
-            _sudoku.Restore(snapshot);
-            mementos.Remove(snapshot);
+            if (mementos.Any())
+            {
+                var snapshot = mementos.Last();
+                _sudoku.Restore(snapshot);
+                mementos.Remove(snapshot);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void ChangeSudoku(Sudoku sudoku) 
@@ -35,5 +43,6 @@ namespace Classes.Memento
             _sudoku = sudoku;
             mementos.Clear();
         }
+
     }
 }

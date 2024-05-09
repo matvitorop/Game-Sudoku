@@ -2,6 +2,7 @@ using System.Windows.Forms;
 using Classes;
 using Classes.CoR;
 using Classes.Factory;
+using Classes.Memento;
 using Classes.SudokuTypes;
 using Classes.Visitor;
 namespace MainWindow
@@ -28,6 +29,8 @@ namespace MainWindow
         SudokuService sudokuService = SudokuService.Instance;
 
         IVisitor visitor = new SudokuVisitor();
+
+        SudokuCaretaker sudokuSnapshots;
         public Playing(Form form, int size, string difficulty)
         {
             InitializeComponent();
@@ -62,6 +65,8 @@ namespace MainWindow
             sudokuService.SetSudoku(sudoku);
             sudokuService.GenerateSudoku();
 
+            sudokuSnapshots = new SudokuCaretaker(sudoku);
+
             buttons = new Button[size, size];
         }
         public Playing()
@@ -73,20 +78,16 @@ namespace MainWindow
         {
             if (sudokuService.ValidateSudoku())
             {
-                MessageBox.Show("Ви виграли");
+                MessageBox.Show("Перемога");
             }
             else
             {
-                MessageBox.Show("Помилка");
+                MessageBox.Show("Поразка");
             }
+            //===============================ОБРОБКА РЕЗУЛЬТАТУ===============================
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
         {
 
         }
@@ -102,10 +103,13 @@ namespace MainWindow
 
         private void button4_Click(object sender, EventArgs e)
         {
+            bt_backup.Enabled = true;
+            bt_check.Enabled = true;
+            bt_save.Enabled = true;
+            //===============================МОЖЛИВИЙ РЕФАКТОРИНГ===============================
             bt_start.Enabled = false;
             sudoku.Accept(visitor);
 
-            // Перевіряємо розмір, щоб гарантувати правильність індексів у циклі
             int gridSize = size;
             if (gridSize != 4 && gridSize != 9 && gridSize != 16)
             {
@@ -121,35 +125,86 @@ namespace MainWindow
                     buttons[i, j] = button;
                     button.Size = new Size(50, 50);
                     button.Location = new Point(i * 50, j * 50);
-                    int x = i; // Зберігаємо значення "i" для використання в обробнику подій
-                    int y = j; // Зберігаємо значення "j" для використання в обробнику подій
-                    
+                    int x = i;
+                    int y = j;
+
                     button.Text = sudokuService.GetSudokuNumber(x, y).ToString();
 
                     Font buttonFont = new Font("Modern No. 20", 14.25f);
                     button.Font = buttonFont;
-                    
+
+                    Color squareColor = GetSquareColor(x, y, size);
+                    button.BackColor = squareColor;
+
+
                     if (button.Text != "0")
                     {
                         button.Enabled = false;
                     }
                     else
                     {
-                        button.BackColor = Color.White;
+                        button.ForeColor = Color.Blue;
+                        //Font buttonFont = new Font("Modern No. 20", 14.25f);
+                        //button.Font = buttonFont;
                     }
 
                     button.Click += (btnSender, btnEvent) =>
                     {
-                        // Зміна тексту кнопки на числа від 1 до 9 у циклі
                         int currentValue = int.Parse(((Button)btnSender).Text);
-                        int newValue = (currentValue % 9) + 1;
+
+                        int newValue = (currentValue % size) + 1;
+
                         ((Button)btnSender).Text = newValue.ToString();
 
                         sudokuService.setSudokuNumber(x, y, newValue);
-                        // Виведення у MessageBox координат кнопки та нового значення
-                        //MessageBox.Show($"Кнопка [{x}, {y}] змінена на {newValue}.");
                     };
+
                     this.Controls.Add(button);
+                }
+            }
+
+            Color GetSquareColor(int x, int y, int size)
+            {
+                int squareSize = (int)Math.Sqrt(size);
+
+                int squareX = x / squareSize;
+                int squareY = y / squareSize;
+
+                if ((squareX + squareY) % 2 == 0)
+                {
+                    return Color.LightGray;
+                }
+                else
+                {
+                    return Color.White;
+                }
+            }
+        }
+
+        private void bt_save_Click(object sender, EventArgs e)
+        {
+            sudokuSnapshots.SaveBackup();
+        }
+
+        private void bt_backup_Click(object sender, EventArgs e)
+        {
+            if (sudokuSnapshots.Restore())
+            {
+                UpdateGridFromSnapshot();
+            }
+            else
+            {
+                MessageBox.Show("Відсутні збереження");
+            }
+        }
+
+        private void UpdateGridFromSnapshot()
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    buttons[i, j].Text = sudokuService.GetSudokuNumber(i, j).ToString();
                 }
             }
         }
