@@ -31,13 +31,12 @@
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
-            label1 = new Label();
-            label2 = new Label();
+            bt_start = new Button();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(573, 155);
+            button1.Location = new Point(492, 196);
             button1.Name = "button1";
             button1.Size = new Size(95, 43);
             button1.TabIndex = 0;
@@ -47,7 +46,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(693, 155);
+            button2.Location = new Point(606, 196);
             button2.Name = "button2";
             button2.Size = new Size(95, 43);
             button2.TabIndex = 1;
@@ -57,7 +56,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(629, 215);
+            button3.Location = new Point(546, 265);
             button3.Name = "button3";
             button3.Size = new Size(105, 42);
             button3.TabIndex = 2;
@@ -65,42 +64,30 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
-            // label1
+            // bt_start
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(573, 69);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 3;
-            label1.Text = "label1";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(661, 326);
-            label2.Name = "label2";
-            label2.Size = new Size(38, 15);
-            label2.TabIndex = 4;
-            label2.Text = "label2";
+            bt_start.Location = new Point(546, 140);
+            bt_start.Name = "bt_start";
+            bt_start.Size = new Size(105, 35);
+            bt_start.TabIndex = 3;
+            bt_start.Text = "Почати";
+            bt_start.UseVisualStyleBackColor = true;
+            bt_start.Click += button4_Click;
             // 
             // Playing
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 192, 192);
-            ClientSize = new Size(800, 450);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            ClientSize = new Size(710, 469);
+            Controls.Add(bt_start);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "Playing";
             Text = "This is Sudoku!";
             FormClosing += Playing_FormClosing;
-            FormClosed += Playing_FormClosed;
-            Load += Playing_Load;
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -108,7 +95,6 @@
         private Button button1;
         private Button button2;
         private Button button3;
-        private Label label1;
-        private Label label2;
+        private Button bt_start;
     }
 }

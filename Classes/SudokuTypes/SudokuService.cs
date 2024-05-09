@@ -198,6 +198,11 @@ namespace Classes.SudokuTypes
         {
             return sudokuToChange.sudokuTable[row, col];
         }
+        public void setSudokuNumber(int row, int col, int value)
+        {
+            sudokuToChange.sudokuTable[row,col] = value;
+        }
+
     
     }
 }

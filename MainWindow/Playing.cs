@@ -11,19 +11,19 @@ namespace MainWindow
         //МОЖНА ЗАСТОСУВАТИ ІТЕРАТОР
 
         Form choosingForm;
-        
+
         int size;
         string difficulty;
-        
+
         ISudokuFactory sudokuFactory;
-        
+
         Sudoku sudoku;
 
         BaseHandler factory_one = new ReturnEasyFactory();
         BaseHandler factory_two = new ReturnNormalFactory();
         BaseHandler factory_three = new ReturnHardFactory();
 
-        Button[,] buttons; 
+        Button[,] buttons;
 
         SudokuService sudokuService = SudokuService.Instance;
 
@@ -33,15 +33,16 @@ namespace MainWindow
             InitializeComponent();
 
             choosingForm = form;
-            
+
             this.size = size;
             this.difficulty = difficulty;
-            
+
             factory_two.SetNextHandler(factory_three);
             factory_one.SetNextHandler(factory_two);
 
             sudokuFactory = factory_one.HandleRequest(difficulty);
 
+            //===================================МОЖЛИВА ЗАМІНА===================================
             switch (size)
             {
                 case 4:
@@ -51,7 +52,7 @@ namespace MainWindow
                     sudoku = sudokuFactory.CreateMediumSudoku();
                     break;
                 case 16:
-                    sudoku = sudokuFactory.CreateMediumSudoku();
+                    sudoku = sudokuFactory.CreateBigSudoku();
                     break;
 
                 default:
@@ -70,20 +71,13 @@ namespace MainWindow
 
         private void button3_Click(object sender, EventArgs e)
         {
-            sudoku.Accept(visitor);
-
-            for (int i = 0; i < 9; i++)
+            if (sudokuService.ValidateSudoku())
             {
-                for (int j = 0; j < 9; j++)
-                {
-                    Button button = new Button();
-                    buttons[i,j] = button;
-                    button.Size = new Size(50, 50);
-                    button.Text = sudokuService.GetSudokuNumber(i,j).ToString();
-                    button.Location = new Point(i*50, j*50);
-                    this.Controls.Add(button);
-                }
-                
+                MessageBox.Show("Ви виграли");
+            }
+            else
+            {
+                MessageBox.Show("Помилка");
             }
         }
 
@@ -97,24 +91,67 @@ namespace MainWindow
 
         }
 
-        private void Playing_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void Playing_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (choosingForm != null)
             {
+                bt_start.Enabled = true;
                 choosingForm.Show();
             }
         }
 
-        private void Playing_FormClosed(object sender, FormClosedEventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            
-        }
+            bt_start.Enabled = false;
+            sudoku.Accept(visitor);
 
-        
+            // Перевіряємо розмір, щоб гарантувати правильність індексів у циклі
+            int gridSize = size;
+            if (gridSize != 4 && gridSize != 9 && gridSize != 16)
+            {
+                MessageBox.Show("Невірний розмір судоку.");
+                return;
+            }
+
+            for (int i = 0; i < gridSize; i++)
+            {
+                for (int j = 0; j < gridSize; j++)
+                {
+                    Button button = new Button();
+                    buttons[i, j] = button;
+                    button.Size = new Size(50, 50);
+                    button.Location = new Point(i * 50, j * 50);
+                    int x = i; // Зберігаємо значення "i" для використання в обробнику подій
+                    int y = j; // Зберігаємо значення "j" для використання в обробнику подій
+                    
+                    button.Text = sudokuService.GetSudokuNumber(x, y).ToString();
+
+                    Font buttonFont = new Font("Modern No. 20", 14.25f);
+                    button.Font = buttonFont;
+                    
+                    if (button.Text != "0")
+                    {
+                        button.Enabled = false;
+                    }
+                    else
+                    {
+                        button.BackColor = Color.White;
+                    }
+
+                    button.Click += (btnSender, btnEvent) =>
+                    {
+                        // Зміна тексту кнопки на числа від 1 до 9 у циклі
+                        int currentValue = int.Parse(((Button)btnSender).Text);
+                        int newValue = (currentValue % 9) + 1;
+                        ((Button)btnSender).Text = newValue.ToString();
+
+                        sudokuService.setSudokuNumber(x, y, newValue);
+                        // Виведення у MessageBox координат кнопки та нового значення
+                        //MessageBox.Show($"Кнопка [{x}, {y}] змінена на {newValue}.");
+                    };
+                    this.Controls.Add(button);
+                }
+            }
+        }
     }
 }

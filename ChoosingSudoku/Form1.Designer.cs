@@ -95,6 +95,7 @@
             // format_16
             // 
             format_16.AutoSize = true;
+            format_16.Enabled = false;
             format_16.Font = new Font("Modern No. 20", 14.25F);
             format_16.Location = new Point(10, 73);
             format_16.Name = "format_16";
