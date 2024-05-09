@@ -99,11 +99,6 @@ namespace MainWindow
             //===============================œŒ“–≤¡Õ¿ Œ¡–Œ¡ ¿ –≈«”À‹“¿“”===============================
         }
 
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //
-        //}
-        //action for closing window
         private void Playing_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (choosingForm != null)
@@ -112,14 +107,13 @@ namespace MainWindow
                 choosingForm.Show();
             }
         }
-        
+
         //generating playground of buttons, that containing numbers and event
         private void button4_Click(object sender, EventArgs e)
         {
             bt_backup.Enabled = true;
             bt_check.Enabled = true;
             bt_save.Enabled = true;
-            //===============================ÃŒ∆À»¬»… –≈‘¿ “Œ–»Õ√===============================
             bt_start.Enabled = false;
             sudoku.Accept(visitor);
 
@@ -130,14 +124,34 @@ namespace MainWindow
                 return;
             }
 
+            int buttonSize = 50;
+            int spacing = 5;
+            int sudokuSize = gridSize * (buttonSize + spacing) + spacing;
+
+            //coords of right side of sudoku
+            int rightEdgeX = spacing + sudokuSize;
+
+            //locating buttons
+            bt_start.Location = new Point(rightEdgeX + 15, 5);
+            bt_check.Location = new Point(rightEdgeX + 15, 5 + bt_start.Height + 5);
+            bt_save.Location = new Point(rightEdgeX + 15, 5 + bt_start.Height + 5+ bt_check.Height + 5);
+            bt_backup.Location = new Point(rightEdgeX + 15 + bt_start.Width + 5, 5);
+
+            //calculating window size
+            int windowSize = gridSize * (buttonSize + spacing) + spacing;
+
+            //setting window size
+            this.ClientSize = new Size(windowSize + 285, windowSize);
+            
+            //cycle of placing sudoku on playground
             for (int i = 0; i < gridSize; i++)
             {
                 for (int j = 0; j < gridSize; j++)
                 {
                     Button button = new Button();
                     buttons[i, j] = button;
-                    button.Size = new Size(50, 50);
-                    button.Location = new Point(i * 50, j * 50);
+                    button.Size = new Size(buttonSize, buttonSize);
+                    button.Location = new Point(spacing + i * (buttonSize + spacing), spacing + j * (buttonSize + spacing));
                     int x = i;
                     int y = j;
 
@@ -149,7 +163,6 @@ namespace MainWindow
                     Color squareColor = GetSquareColor(x, y, size);
                     button.BackColor = squareColor;
 
-
                     if (button.Text != "0")
                     {
                         button.Enabled = false;
@@ -157,18 +170,14 @@ namespace MainWindow
                     else
                     {
                         button.ForeColor = Color.Blue;
-                        //Font buttonFont = new Font("Modern No. 20", 14.25f);
-                        //button.Font = buttonFont;
                     }
 
                     button.Click += (btnSender, btnEvent) =>
                     {
                         int currentValue = int.Parse(((Button)btnSender).Text);
-
                         int newValue = (currentValue % size) + 1;
 
                         ((Button)btnSender).Text = newValue.ToString();
-
                         sudokuService.setSudokuNumber(x, y, newValue);
                     };
 

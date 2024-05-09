@@ -38,9 +38,9 @@
             // 
             bt_backup.Enabled = false;
             bt_backup.Font = new Font("Modern No. 20", 14.25F, FontStyle.Bold);
-            bt_backup.Location = new Point(495, 271);
+            bt_backup.Location = new Point(187, 39);
             bt_backup.Name = "bt_backup";
-            bt_backup.Size = new Size(189, 79);
+            bt_backup.Size = new Size(120, 165);
             bt_backup.TabIndex = 0;
             bt_backup.Text = "Повернутись до останнього збереження";
             bt_backup.UseVisualStyleBackColor = true;
@@ -50,7 +50,7 @@
             // 
             bt_save.Enabled = false;
             bt_save.Font = new Font("Modern No. 20", 14.25F, FontStyle.Bold);
-            bt_save.Location = new Point(527, 203);
+            bt_save.Location = new Point(63, 96);
             bt_save.Name = "bt_save";
             bt_save.Size = new Size(118, 51);
             bt_save.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             bt_check.Enabled = false;
             bt_check.Font = new Font("Modern No. 20", 14.25F, FontStyle.Bold);
-            bt_check.Location = new Point(598, 133);
+            bt_check.Location = new Point(63, 153);
             bt_check.Name = "bt_check";
             bt_check.Size = new Size(118, 51);
             bt_check.TabIndex = 2;
@@ -73,7 +73,7 @@
             // bt_start
             // 
             bt_start.Font = new Font("Modern No. 20", 14.25F, FontStyle.Bold);
-            bt_start.Location = new Point(458, 133);
+            bt_start.Location = new Point(63, 39);
             bt_start.Name = "bt_start";
             bt_start.Size = new Size(118, 51);
             bt_start.TabIndex = 3;
@@ -86,7 +86,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DarkGoldenrod;
-            ClientSize = new Size(728, 469);
+            ClientSize = new Size(370, 253);
             Controls.Add(bt_start);
             Controls.Add(bt_check);
             Controls.Add(bt_save);
