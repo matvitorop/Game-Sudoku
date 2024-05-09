@@ -11,26 +11,38 @@ namespace MainWindow
     {
         //ÃŒ∆Õ¿ «¿—“Œ—”¬¿“» ≤“≈–¿“Œ–
 
-        Form choosingForm;
+        //fields for stable work and oprimizing by different pattern
+        
+        Form choosingForm; //previous form
 
-        int size;
+        //variables for generating factory and size of sudoku
+        int size; 
         string difficulty;
 
+        //factory
         ISudokuFactory sudokuFactory;
 
+        //current sudoku
         Sudoku sudoku;
 
+        //CoR for creating factory
         BaseHandler factory_one = new ReturnEasyFactory();
         BaseHandler factory_two = new ReturnNormalFactory();
         BaseHandler factory_three = new ReturnHardFactory();
 
+        //array for playground
         Button[,] buttons;
 
+        //sudoku menager
         SudokuService sudokuService = SudokuService.Instance;
 
+        //visitor for prepearing sudoku before a game
         IVisitor visitor = new SudokuVisitor();
 
+        //sudoku snapshots caretaker
         SudokuCaretaker sudokuSnapshots;
+
+        //initializing variables
         public Playing(Form form, int size, string difficulty)
         {
             InitializeComponent();
@@ -84,14 +96,14 @@ namespace MainWindow
             {
                 MessageBox.Show("œÓ‡ÁÍ‡");
             }
-            //===============================Œ¡–Œ¡ ¿ –≈«”À‹“¿“”===============================
+            //===============================œŒ“–≤¡Õ¿ Œ¡–Œ¡ ¿ –≈«”À‹“¿“”===============================
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //
+        //}
+        //action for closing window
         private void Playing_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (choosingForm != null)
@@ -100,7 +112,8 @@ namespace MainWindow
                 choosingForm.Show();
             }
         }
-
+        
+        //generating playground of buttons, that containing numbers and event
         private void button4_Click(object sender, EventArgs e)
         {
             bt_backup.Enabled = true;
@@ -162,25 +175,8 @@ namespace MainWindow
                     this.Controls.Add(button);
                 }
             }
-
-            Color GetSquareColor(int x, int y, int size)
-            {
-                int squareSize = (int)Math.Sqrt(size);
-
-                int squareX = x / squareSize;
-                int squareY = y / squareSize;
-
-                if ((squareX + squareY) % 2 == 0)
-                {
-                    return Color.LightGray;
-                }
-                else
-                {
-                    return Color.White;
-                }
-            }
         }
-
+        //buttons for backups
         private void bt_save_Click(object sender, EventArgs e)
         {
             sudokuSnapshots.SaveBackup();
@@ -195,6 +191,24 @@ namespace MainWindow
             else
             {
                 MessageBox.Show("¬≥‰ÒÛÚÌ≥ Á·ÂÂÊÂÌÌˇ");
+            }
+        }
+
+        //methods for intermediate results and actions
+        private Color GetSquareColor(int x, int y, int size)
+        {
+            int squareSize = (int)Math.Sqrt(size);
+
+            int squareX = x / squareSize;
+            int squareY = y / squareSize;
+
+            if ((squareX + squareY) % 2 == 0)
+            {
+                return Color.LightGray;
+            }
+            else
+            {
+                return Color.White;
             }
         }
 

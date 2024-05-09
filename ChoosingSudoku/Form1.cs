@@ -12,6 +12,8 @@ namespace ChoosingSudoku
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //checking data and creating playground if variables are valid
+
             if (difficulty!="" && size != 0)
             {
                 Playing playWindow = new Playing(this, size, difficulty);
@@ -24,7 +26,7 @@ namespace ChoosingSudoku
             }
             
         }
-
+        //radiobuttons, that initializing variables for next window
         private void format_4_CheckedChanged(object sender, EventArgs e)
         {
             size = 4;
