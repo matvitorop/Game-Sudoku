@@ -87,5 +87,16 @@ User user = new User
 //collection.InsertOne(user);
 
 var db = DatabaseManager.Instance;
-db.InsertUser(user);
+User currUser = db.AddOrGetUser(user);
 
+if(currUser == null)
+{
+    Console.WriteLine("Невiрний пароль");
+}
+
+
+
+
+db.UpdateEasySudoku(currUser);
+db.UpdateNormalSudoku(currUser);
+db.UpdateHardSudoku(currUser);

@@ -36,17 +36,77 @@ namespace Classes.MongoDB
             }
         }
 
-        public void InsertUser(User user)
+        public User AddOrGetUser(User user)
         {
-            usersCollection.InsertOne(user);
+            var filterByUsername = Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
+            var existingUser = usersCollection.Find(filterByUsername).FirstOrDefault();
+
+            if (existingUser != null)
+            {
+                if (existingUser.Password == user.Password)
+                {
+                    return existingUser;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                usersCollection.InsertOne(user);
+                return user;
+            }
         }
 
-        public void UpdateUser(User user)
+        public void UpdateScore(User user, int value)
         {
-            var filter = Builders<User>.Filter.Eq(u => u.Id, user.Id);
-            usersCollection.ReplaceOne(filter, user);
+            var filter = Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
+
+            var update = Builders<User>
+                .Update
+                .Inc(a => a.TotalScore, value);
+
+            usersCollection.UpdateOne(filter, update);
         }
 
+        public void UpdateEasySudoku(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
+
+            var update = Builders<User>
+                .Update
+                .Inc(a => a.EasySudokuCount, 1);
+
+            usersCollection.UpdateOne(filter, update);
+        }
+
+        public void UpdateNormalSudoku(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
+
+            var update = Builders<User>
+                .Update
+                .Inc(a => a.MediumSudokuCount, 1);
+
+            usersCollection.UpdateOne(filter, update);
+        }
+
+        public void UpdateHardSudoku(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
+
+            var update = Builders<User>
+                .Update
+                .Inc(a => a.HardSudokuCount, 1);
+
+            usersCollection.UpdateOne(filter, update);
+        }
+
+
+
+
+        //=========================МОЖЛИВЕ ВИДАЛЕННЯ=========================
         public User FindUser(string nickname)
         {
             var filter = Builders<User>.Filter.Eq(u => u.Nickname, nickname);
