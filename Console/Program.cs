@@ -5,6 +5,7 @@ using Classes.Visitor;
 using Classes.SudokuTypes;
 using Classes.Memento;
 using System.Security.AccessControl;
+using Classes.MongoDB;
 //string connectionString = "mongodb://localhost:27017";
 //
 //var client = new MongoClient(connectionString);
@@ -33,37 +34,58 @@ var generator = SudokuService.Instance;
 generator.SetSudoku(MediumSudoku);
 generator.GenerateSudoku();
 
-for (int i = 0; i < 9; i++)
-{
-    for (int j = 0; j < 9; j++)
-    {
-        Console.Write(MediumSudoku.sudokuTable[i, j] + " ");
-    }
-    Console.WriteLine();
-}
-
+//for (int i = 0; i < 9; i++)
+//{
+//    for (int j = 0; j < 9; j++)
+//    {
+//        Console.Write(MediumSudoku.sudokuTable[i, j] + " ");
+//    }
+//    Console.WriteLine();
+//}
+//
+////MediumSudoku.Accept(visitor);
+//Console.WriteLine();
+//
+//
+//if (generator.ValidateSudoku())
+//{
+//    Console.WriteLine("Ура");
+//}
+//else
+//{
+//    Console.WriteLine("Ну чому!");
+//}
+//
 //MediumSudoku.Accept(visitor);
-Console.WriteLine();
+//for (int i = 0; i < 9; i++)
+//{
+//    for (int j = 0; j < 9; j++)
+//    {
+//        Console.Write(MediumSudoku.sudokuTable[i, j] + " ");
+//    }
+//    Console.WriteLine();
+//}
 
-
-if (generator.ValidateSudoku())
+//string connectionString = "mongodb://localhost:27017";
+//
+//var client = new MongoClient(connectionString);
+//
+//var db = client.GetDatabase("Sudoku-Users");
+//
+//var collection = db.GetCollection<User>("Users");
+//
+User user = new User
 {
-    Console.WriteLine("Ура");
-}
-else
-{
-    Console.WriteLine("Ну чому!");
-}
+    Nickname = "AmateusXXX",
+    Password = "password",
+    HardSudokuCount = 5,
+    MediumSudokuCount = 10,
+    EasySudokuCount = 15,
+    TotalScore = 5000
+};
+//
+//collection.InsertOne(user);
 
-MediumSudoku.Accept(visitor);
-for (int i = 0; i < 9; i++)
-{
-    for (int j = 0; j < 9; j++)
-    {
-        Console.Write(MediumSudoku.sudokuTable[i, j] + " ");
-    }
-    Console.WriteLine();
-}
-
-
+var db = DatabaseManager.Instance;
+db.InsertUser(user);
 

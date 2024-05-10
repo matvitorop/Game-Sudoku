@@ -48,7 +48,7 @@
             // 
             button1.BackColor = Color.FromArgb(128, 255, 128);
             button1.Font = new Font("Modern No. 20", 14.25F, FontStyle.Bold);
-            button1.Location = new Point(107, 249);
+            button1.Location = new Point(88, 218);
             button1.Name = "button1";
             button1.Size = new Size(157, 58);
             button1.TabIndex = 19;
@@ -132,7 +132,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Modern No. 20", 17.9999981F, FontStyle.Bold);
-            label3.Location = new Point(223, 67);
+            label3.Location = new Point(203, 67);
             label3.Name = "label3";
             label3.Size = new Size(137, 25);
             label3.TabIndex = 12;
@@ -142,7 +142,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Modern No. 20", 17.9999981F, FontStyle.Bold);
-            label2.Location = new Point(55, 67);
+            label2.Location = new Point(35, 67);
             label2.Name = "label2";
             label2.Size = new Size(95, 25);
             label2.TabIndex = 11;
@@ -152,7 +152,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Modern No. 20", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(65, 9);
+            label1.Location = new Point(45, 9);
             label1.Name = "label1";
             label1.Size = new Size(246, 29);
             label1.TabIndex = 10;
@@ -163,7 +163,7 @@
             groupBox1.Controls.Add(format_4);
             groupBox1.Controls.Add(format_9);
             groupBox1.Controls.Add(format_16);
-            groupBox1.Location = new Point(55, 95);
+            groupBox1.Location = new Point(35, 95);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(101, 104);
             groupBox1.TabIndex = 20;
@@ -174,7 +174,7 @@
             groupBox2.Controls.Add(compl_easy);
             groupBox2.Controls.Add(compl_med);
             groupBox2.Controls.Add(compl_hard);
-            groupBox2.Location = new Point(223, 95);
+            groupBox2.Location = new Point(203, 95);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(101, 104);
             groupBox2.TabIndex = 21;
@@ -185,7 +185,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Highlight;
-            ClientSize = new Size(384, 339);
+            ClientSize = new Size(358, 294);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(button1);

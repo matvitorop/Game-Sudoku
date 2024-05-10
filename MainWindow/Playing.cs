@@ -117,8 +117,8 @@ namespace MainWindow
             bt_start.Enabled = false;
             sudoku.Accept(visitor);
 
-            int gridSize = size;
-            if (gridSize != 4 && gridSize != 9 && gridSize != 16)
+            
+            if (size != 4 && size != 9 && size != 16)
             {
                 MessageBox.Show("Невірний розмір судоку.");
                 return;
@@ -126,27 +126,22 @@ namespace MainWindow
 
             int buttonSize = 50;
             int spacing = 5;
-            int sudokuSize = gridSize * (buttonSize + spacing) + spacing;
-
-            //coords of right side of sudoku
-            int rightEdgeX = spacing + sudokuSize;
+            //calculating window size
+            int windowSize = size * (buttonSize + spacing) + spacing;
 
             //locating buttons
-            bt_start.Location = new Point(rightEdgeX + 15, 5);
-            bt_check.Location = new Point(rightEdgeX + 15, 5 + bt_start.Height + 5);
-            bt_save.Location = new Point(rightEdgeX + 15, 5 + bt_start.Height + 5+ bt_check.Height + 5);
-            bt_backup.Location = new Point(rightEdgeX + 15 + bt_start.Width + 5, 5);
-
-            //calculating window size
-            int windowSize = gridSize * (buttonSize + spacing) + spacing;
+            bt_start.Location = new Point(windowSize + 15, 5);
+            bt_check.Location = new Point(windowSize + 15, 5 + bt_start.Height + 5);
+            bt_save.Location = new Point(windowSize + 15, 5 + bt_start.Height + 5+ bt_check.Height + 5);
+            bt_backup.Location = new Point(windowSize + 15 + bt_start.Width + 5, 5);
 
             //setting window size
-            this.ClientSize = new Size(windowSize + 285, windowSize);
+            this.ClientSize = new Size(windowSize + 277, windowSize);
             
             //cycle of placing sudoku on playground
-            for (int i = 0; i < gridSize; i++)
+            for (int i = 0; i < size; i++)
             {
-                for (int j = 0; j < gridSize; j++)
+                for (int j = 0; j < size; j++)
                 {
                     Button button = new Button();
                     buttons[i, j] = button;
