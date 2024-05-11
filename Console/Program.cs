@@ -40,11 +40,7 @@ generator.GenerateSudoku();
 //User user = new User
 //{
 //    Nickname = "AmateusXXX",
-//    Password = "password",
-//    HardSudokuCount = 5,
-//    MediumSudokuCount = 10,
-//    EasySudokuCount = 15,
-//    TotalScore = 5000
+//    Password = "password"
 //};
 ////
 ////collection.InsertOne(user);
@@ -55,6 +51,10 @@ generator.GenerateSudoku();
 //if(currUser == null)
 //{
 //    Console.WriteLine("Невiрний пароль");
+//}
+//else
+//{
+//    Console.WriteLine($"{currUser.Nickname}");
 //}
 //
 //

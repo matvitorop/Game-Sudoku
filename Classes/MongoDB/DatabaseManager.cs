@@ -10,10 +10,12 @@ namespace Classes.MongoDB
 {
     public class DatabaseManager
     {
+        //singleton db connection
         private static DatabaseManager _instance;
         
         private readonly IMongoCollection<User> usersCollection;
 
+        //connecting
         private DatabaseManager()
         {
             string connectionString = "mongodb://localhost:27017";
@@ -23,7 +25,7 @@ namespace Classes.MongoDB
             
             usersCollection = database.GetCollection<User>("Users");
         }
-
+        //current Manager
         public static DatabaseManager Instance
         {
             get
@@ -35,7 +37,7 @@ namespace Classes.MongoDB
                 return _instance;
             }
         }
-
+        //function for SIMPLE authorization 
         public User AddOrGetUser(User user)
         {
             var filterByUsername = Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
@@ -58,7 +60,7 @@ namespace Classes.MongoDB
                 return user;
             }
         }
-
+        //updating fields
         public void UpdateScore(User user, int value)
         {
             var filter = Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
@@ -103,14 +105,5 @@ namespace Classes.MongoDB
             usersCollection.UpdateOne(filter, update);
         }
 
-
-
-
-        //=========================МОЖЛИВЕ ВИДАЛЕННЯ=========================
-        public User FindUser(string nickname)
-        {
-            var filter = Builders<User>.Filter.Eq(u => u.Nickname, nickname);
-            return usersCollection.Find(filter).FirstOrDefault();
-        }
     }
 }

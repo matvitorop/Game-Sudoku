@@ -46,7 +46,8 @@
             // 
             // button1
             // 
-            button1.BackColor = Color.FromArgb(128, 255, 128);
+            button1.BackColor = Color.FromArgb(0, 192, 0);
+            button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Modern No. 20", 14.25F, FontStyle.Bold);
             button1.Location = new Point(88, 218);
             button1.Name = "button1";
@@ -131,7 +132,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Modern No. 20", 17.9999981F, FontStyle.Bold);
+            label3.Font = new Font("Modern No. 20", 17.9999981F, FontStyle.Bold | FontStyle.Underline);
             label3.Location = new Point(203, 67);
             label3.Name = "label3";
             label3.Size = new Size(137, 25);
@@ -141,7 +142,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Modern No. 20", 17.9999981F, FontStyle.Bold);
+            label2.Font = new Font("Modern No. 20", 17.9999981F, FontStyle.Bold | FontStyle.Underline);
             label2.Location = new Point(35, 67);
             label2.Name = "label2";
             label2.Size = new Size(95, 25);
@@ -151,8 +152,8 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Modern No. 20", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(45, 9);
+            label1.Font = new Font("Modern No. 20", 20.25F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            label1.Location = new Point(58, 9);
             label1.Name = "label1";
             label1.Size = new Size(246, 29);
             label1.TabIndex = 10;
@@ -184,7 +185,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Highlight;
+            BackColor = Color.RoyalBlue;
             ClientSize = new Size(358, 294);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -195,6 +196,7 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "This is Sudoku!";
+            FormClosing += Form1_FormClosing;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);

@@ -8,4 +8,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ChoosingSudoku\ChoosingSudoku.csproj" />
+    <ProjectReference Include="..\Classes\Classes.csproj" />
+  </ItemGroup>
+
 </Project>
