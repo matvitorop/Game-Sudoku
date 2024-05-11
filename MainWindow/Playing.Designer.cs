@@ -68,7 +68,7 @@
             bt_check.TabIndex = 2;
             bt_check.Text = "Finish (check)";
             bt_check.UseVisualStyleBackColor = true;
-            bt_check.Click += button3_Click;
+            bt_check.Click += bt_check_Click;
             // 
             // bt_start
             // 

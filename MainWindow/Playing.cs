@@ -3,21 +3,22 @@ using Classes;
 using Classes.CoR;
 using Classes.Factory;
 using Classes.Memento;
+using Classes.MongoDB;
 using Classes.SudokuTypes;
 using Classes.Visitor;
 namespace MainWindow
 {
     public partial class Playing : Form
     {
-        //ÃŒ∆Õ¿ «¿—“Œ—”¬¿“» ≤“≈–¿“Œ–
+        //ÃŒ∆À»¬Œ «¿—“Œ—”¬¿“» ≤“≈–¿“Œ–
 
-        //fields for stable work and oprimizing by different pattern
-        
         Form choosingForm; //previous form
 
-        //variables for generating factory and size of sudoku
-        int size; 
+        //variables for generating factory and size of sudoku and current user
+        int size;
         string difficulty;
+        User currentUser;
+        DatabaseManager dbMenager = DatabaseManager.Instance;
 
         //factory
         ISudokuFactory sudokuFactory;
@@ -43,7 +44,7 @@ namespace MainWindow
         SudokuCaretaker sudokuSnapshots;
 
         //initializing variables
-        public Playing(Form form, int size, string difficulty)
+        public Playing(Form form, int size, string difficulty, User cuurentUser)
         {
             InitializeComponent();
 
@@ -54,6 +55,7 @@ namespace MainWindow
 
             factory_two.SetNextHandler(factory_three);
             factory_one.SetNextHandler(factory_two);
+            this.currentUser = cuurentUser;
 
             sudokuFactory = factory_one.HandleRequest(difficulty);
 
@@ -86,18 +88,6 @@ namespace MainWindow
             InitializeComponent();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (sudokuService.ValidateSudoku())
-            {
-                MessageBox.Show("Victory");
-            }
-            else
-            {
-                MessageBox.Show("Fail");
-            }
-            //===============================œŒ“–≤¡Õ¿ Œ¡–Œ¡ ¿ –≈«”À‹“¿“”===============================
-        }
 
         private void Playing_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -117,7 +107,7 @@ namespace MainWindow
             bt_start.Enabled = false;
             sudoku.Accept(visitor);
 
-            
+
             if (size != 4 && size != 9 && size != 16)
             {
                 MessageBox.Show("Wrong sudoku size");
@@ -132,12 +122,12 @@ namespace MainWindow
             //locating buttons
             bt_start.Location = new Point(windowSize + 15, 5);
             bt_check.Location = new Point(windowSize + 15, 5 + bt_start.Height + 5);
-            bt_save.Location = new Point(windowSize + 15, 5 + bt_start.Height + 5+ bt_check.Height + 5);
+            bt_save.Location = new Point(windowSize + 15, 5 + bt_start.Height + 5 + bt_check.Height + 5);
             bt_backup.Location = new Point(windowSize + 15 + bt_start.Width + 5, 5);
 
             //setting window size
             this.ClientSize = new Size(windowSize + 277, windowSize);
-            
+
             //cycle of placing sudoku on playground
             for (int i = 0; i < size; i++)
             {
@@ -169,6 +159,7 @@ namespace MainWindow
 
                     button.Click += (btnSender, btnEvent) =>
                     {
+                        //==============================◊» œ–¿¬»À‹ÕŒ œŒ’Œƒ»¬==============================
                         int currentValue = int.Parse(((Button)btnSender).Text);
                         int newValue = (currentValue % size) + 1;
 
@@ -224,6 +215,50 @@ namespace MainWindow
                 {
                     buttons[i, j].Text = sudokuService.GetSudokuNumber(i, j).ToString();
                 }
+            }
+        }
+
+        private void bt_check_Click(object sender, EventArgs e)
+        {
+            //======================ÃŒ∆À»¬Œ «¿—“Œ—”¬¿“» CoR======================
+            if (sudokuService.ValidateSudoku())
+            {
+                int score = 0;
+                switch (difficulty) 
+                {
+                    case "hard":
+                        score += 4;
+                        dbMenager.UpdateHardSudoku(currentUser);
+                        break;
+                    case "normal":
+                        score += 2;
+                        dbMenager.UpdateNormalSudoku(currentUser);
+                        break;
+                    case "easy":
+                        score += 1;
+                        dbMenager.UpdateEasySudoku(currentUser);
+                        break;
+                }
+                switch (size)
+                {
+                    case 4:
+                        score *= 150;
+                        break;
+                    case 9:
+                        score *= 400;
+                        break;
+                    case 16:
+                        score *= 1250;
+                        break;
+                }
+                dbMenager.UpdateScore(currentUser, score);
+                MessageBox.Show("Victory");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Fail");
+                this.Close();
             }
         }
     }

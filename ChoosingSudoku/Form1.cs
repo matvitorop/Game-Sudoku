@@ -1,6 +1,7 @@
 using MainWindow;
 using Classes.MongoDB;
 using System.Windows.Forms;
+using System.Drawing.Design;
 namespace ChoosingSudoku
 {
     public partial class Form1 : Form
@@ -11,7 +12,7 @@ namespace ChoosingSudoku
         User currentUser;
         Form loginForm;
         List<User> users;
-        DatabaseManager dbMenager;
+        public DatabaseManager dbMenager;
 
         public Form1()
         {
@@ -22,26 +23,9 @@ namespace ChoosingSudoku
             InitializeComponent();
             dbMenager = DatabaseManager.Instance;
             this.loginForm = loginForm;
-            this.currentUser = user;
+            this.currentUser = user; 
+            UpdateUsers();
 
-            lb_NicknameRes.Text = currentUser.Nickname;
-            lb_EasySudokuRes.Text = currentUser.EasySudokuCount.ToString();
-            lb_NormalSudokuRes.Text = currentUser.NormalSudokuCount.ToString();
-            lb_HardSudokuRes.Text = currentUser.HardSudokuCount.ToString();
-            lb_scoreRes.Text = currentUser.TotalScore.ToString();
-
-            users = dbMenager.GetAllUsersWithoutPassword();
-            
-            if (users != null)
-            {
-                dgw_Users.DataSource = users;
-                dgw_Users.Columns["Id"].Visible = false;
-                dgw_Users.Columns["Password"].Visible = false;
-                dgw_Users.Columns["HardSudokuCount"].Visible = false;
-                dgw_Users.Columns["NormalSudokuCount"].Visible = false;
-                dgw_Users.Columns["EasySudokuCount"].Visible = false;
-            }
-            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -50,7 +34,7 @@ namespace ChoosingSudoku
 
             if (difficulty != "" && size != 0)
             {
-                Playing playWindow = new Playing(this, size, difficulty);
+                Playing playWindow = new Playing(this, size, difficulty, currentUser);
                 playWindow.Show();
                 this.Hide();
             }
@@ -115,6 +99,35 @@ namespace ChoosingSudoku
                                 "User",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
+            }
+        }
+
+        private void bt_update_Click(object sender, EventArgs e)
+        {
+            UpdateUsers();
+        }
+
+        private void UpdateUsers()
+        {
+            //========================ÃŒ∆À»¬Œ “–≈¡¿ «Ã≈Õÿ»“» Œ¡'™Ã  Œƒ”========================
+            this.currentUser = dbMenager.AddOrGetUser(this.currentUser);
+
+            lb_NicknameRes.Text = currentUser.Nickname;
+            lb_EasySudokuRes.Text = currentUser.EasySudokuCount.ToString();
+            lb_NormalSudokuRes.Text = currentUser.NormalSudokuCount.ToString();
+            lb_HardSudokuRes.Text = currentUser.HardSudokuCount.ToString();
+            lb_scoreRes.Text = currentUser.TotalScore.ToString();
+
+            users = dbMenager.GetAllUsersWithoutPassword();
+
+            if (users != null)
+            {
+                dgw_Users.DataSource = users;
+                dgw_Users.Columns["Id"].Visible = false;
+                dgw_Users.Columns["Password"].Visible = false;
+                dgw_Users.Columns["HardSudokuCount"].Visible = false;
+                dgw_Users.Columns["NormalSudokuCount"].Visible = false;
+                dgw_Users.Columns["EasySudokuCount"].Visible = false;
             }
         }
     }
