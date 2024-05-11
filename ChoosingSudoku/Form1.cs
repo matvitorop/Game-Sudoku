@@ -23,7 +23,7 @@ namespace ChoosingSudoku
             InitializeComponent();
             dbMenager = DatabaseManager.Instance;
             this.loginForm = loginForm;
-            this.currentUser = user; 
+            this.currentUser = user;
             UpdateUsers();
 
         }
@@ -102,11 +102,10 @@ namespace ChoosingSudoku
             }
         }
 
-        private void bt_update_Click(object sender, EventArgs e)
+        private void Form1_VisibleChanged(object sender, EventArgs e)
         {
             UpdateUsers();
         }
-
         private void UpdateUsers()
         {
             //========================лнфкхбн рпеаю глемьхрх на'╙л йндс========================

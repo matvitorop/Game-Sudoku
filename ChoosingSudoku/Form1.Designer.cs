@@ -53,7 +53,6 @@
             lb_NormalSudokuRes = new Label();
             lb_EasySudokuRes = new Label();
             lb_NicknameRes = new Label();
-            bt_update = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgw_Users).BeginInit();
@@ -332,26 +331,12 @@
             lb_NicknameRes.TabIndex = 30;
             lb_NicknameRes.Text = "1";
             // 
-            // bt_update
-            // 
-            bt_update.BackColor = Color.DarkGray;
-            bt_update.FlatStyle = FlatStyle.Flat;
-            bt_update.Font = new Font("Modern No. 20", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            bt_update.Location = new Point(373, 270);
-            bt_update.Name = "bt_update";
-            bt_update.Size = new Size(213, 33);
-            bt_update.TabIndex = 35;
-            bt_update.Text = "Update";
-            bt_update.UseVisualStyleBackColor = false;
-            bt_update.Click += bt_update_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.RoyalBlue;
-            ClientSize = new Size(1045, 332);
-            Controls.Add(bt_update);
+            ClientSize = new Size(1045, 297);
             Controls.Add(lb_scoreRes);
             Controls.Add(lb_HardSudokuRes);
             Controls.Add(lb_NormalSudokuRes);
@@ -375,6 +360,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "This is Sudoku!";
             FormClosing += Form1_FormClosing;
+            VisibleChanged += Form1_VisibleChanged;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -411,6 +397,5 @@
         private Label lb_NormalSudokuRes;
         private Label lb_EasySudokuRes;
         private Label lb_NicknameRes;
-        private Button bt_update;
     }
 }

@@ -112,6 +112,7 @@
             Controls.Add(lb_login);
             Controls.Add(lb_Welcome);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "This is Sudoku!";
             ResumeLayout(false);
             PerformLayout();
