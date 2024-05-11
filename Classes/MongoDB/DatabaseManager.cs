@@ -60,6 +60,13 @@ namespace Classes.MongoDB
                 return user;
             }
         }
+        //getting all users without password
+        public List<User> GetAllUsersWithoutPassword()
+        {
+            var projection = Builders<User>.Projection.Exclude(u => u.Password);
+            var allUsers = usersCollection.Find(_ => true).Project<User>(projection).ToList();
+            return allUsers;
+        }
         //updating fields
         public void UpdateScore(User user, int value)
         {
@@ -103,13 +110,6 @@ namespace Classes.MongoDB
                 .Inc(a => a.HardSudokuCount, 1);
 
             usersCollection.UpdateOne(filter, update);
-        }
-
-        public List<User> GetAllUsersWithoutPassword()
-        {
-            var projection = Builders<User>.Projection.Exclude(u => u.Password);
-            var allUsers = usersCollection.Find(_ => true).Project<User>(projection).ToList();
-            return allUsers;
         }
     }
 }

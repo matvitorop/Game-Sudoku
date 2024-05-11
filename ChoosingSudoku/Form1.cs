@@ -103,10 +103,10 @@ namespace ChoosingSudoku
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                // Отримання об'єкта користувача, який був натиснутий
+                // getting object from list
                 User selectedUser = users[e.RowIndex];
 
-                // Виведення повної інформації про користувача у MessageBox
+                // printing data to datagrid
                 MessageBox.Show($"Nickname: {selectedUser.Nickname}\n" +
                                 $"Hard Sudoku Count: {selectedUser.HardSudokuCount}\n" +
                                 $"Medium Sudoku Count: {selectedUser.NormalSudokuCount}\n" +
