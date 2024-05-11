@@ -89,7 +89,7 @@ namespace Classes.MongoDB
 
             var update = Builders<User>
                 .Update
-                .Inc(a => a.MediumSudokuCount, 1);
+                .Inc(a => a.NormalSudokuCount, 1);
 
             usersCollection.UpdateOne(filter, update);
         }
@@ -105,5 +105,11 @@ namespace Classes.MongoDB
             usersCollection.UpdateOne(filter, update);
         }
 
+        public List<User> GetAllUsersWithoutPassword()
+        {
+            var projection = Builders<User>.Projection.Exclude(u => u.Password);
+            var allUsers = usersCollection.Find(_ => true).Project<User>(projection).ToList();
+            return allUsers;
+        }
     }
 }

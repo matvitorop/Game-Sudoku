@@ -90,11 +90,11 @@ namespace MainWindow
         {
             if (sudokuService.ValidateSudoku())
             {
-                MessageBox.Show("Перемога");
+                MessageBox.Show("Victory");
             }
             else
             {
-                MessageBox.Show("Поразка");
+                MessageBox.Show("Fail");
             }
             //===============================ПОТРІБНА ОБРОБКА РЕЗУЛЬТАТУ===============================
         }
@@ -120,7 +120,7 @@ namespace MainWindow
             
             if (size != 4 && size != 9 && size != 16)
             {
-                MessageBox.Show("Невірний розмір судоку.");
+                MessageBox.Show("Wrong sudoku size");
                 return;
             }
 
@@ -194,7 +194,7 @@ namespace MainWindow
             }
             else
             {
-                MessageBox.Show("Відсутні збереження");
+                MessageBox.Show("Save is not find. Try to save again");
             }
         }
 

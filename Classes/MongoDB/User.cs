@@ -24,8 +24,8 @@ namespace Classes.MongoDB
         [BsonElement("HardSudokuCount")]
         public int HardSudokuCount { get; set; }
 
-        [BsonElement("MediumSudokuCount")]
-        public int MediumSudokuCount { get; set; }
+        [BsonElement("NormalSudokuCount")]
+        public int NormalSudokuCount { get; set; }
 
         [BsonElement("EasySudokuCount")]
         public int EasySudokuCount { get; set; }

@@ -29,12 +29,15 @@ namespace Login
                     tb_login.Text = "";
                     tb_password.Text = "";
                     chooseSudokuForm.Show();
-
                 }
                 else
                 {
-                    MessageBox.Show($"Невірний пароль");
+                    MessageBox.Show($"Wrong password");
                 }
+            }
+            else
+            {
+                MessageBox.Show($"Enter login and password");
             }
         }
     }

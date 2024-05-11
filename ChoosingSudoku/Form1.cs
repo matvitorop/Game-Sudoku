@@ -1,13 +1,18 @@
 using MainWindow;
 using Classes.MongoDB;
+using System.Windows.Forms;
 namespace ChoosingSudoku
 {
     public partial class Form1 : Form
     {
         string difficulty = "";
         int size;
+
         User currentUser;
         Form loginForm;
+        List<User> users;
+        DatabaseManager dbMenager;
+
         public Form1()
         {
             InitializeComponent();
@@ -15,8 +20,28 @@ namespace ChoosingSudoku
         public Form1(Form loginForm, User user)
         {
             InitializeComponent();
+            dbMenager = DatabaseManager.Instance;
             this.loginForm = loginForm;
             this.currentUser = user;
+
+            lb_NicknameRes.Text = currentUser.Nickname;
+            lb_EasySudokuRes.Text = currentUser.EasySudokuCount.ToString();
+            lb_NormalSudokuRes.Text = currentUser.NormalSudokuCount.ToString();
+            lb_HardSudokuRes.Text = currentUser.HardSudokuCount.ToString();
+            lb_scoreRes.Text = currentUser.TotalScore.ToString();
+
+            users = dbMenager.GetAllUsersWithoutPassword();
+            
+            if (users != null)
+            {
+                dgw_Users.DataSource = users;
+                dgw_Users.Columns["Id"].Visible = false;
+                dgw_Users.Columns["Password"].Visible = false;
+                dgw_Users.Columns["HardSudokuCount"].Visible = false;
+                dgw_Users.Columns["NormalSudokuCount"].Visible = false;
+                dgw_Users.Columns["EasySudokuCount"].Visible = false;
+            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -71,6 +96,25 @@ namespace ChoosingSudoku
             if (loginForm != null)
             {
                 loginForm.Show();
+            }
+        }
+
+        private void dgw_Users_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                // Отримання об'єкта користувача, який був натиснутий
+                User selectedUser = users[e.RowIndex];
+
+                // Виведення повної інформації про користувача у MessageBox
+                MessageBox.Show($"Nickname: {selectedUser.Nickname}\n" +
+                                $"Hard Sudoku Count: {selectedUser.HardSudokuCount}\n" +
+                                $"Medium Sudoku Count: {selectedUser.NormalSudokuCount}\n" +
+                                $"Easy Sudoku Count: {selectedUser.EasySudokuCount}\n" +
+                                $"Total Score: {selectedUser.TotalScore}",
+                                "User",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
             }
         }
     }
