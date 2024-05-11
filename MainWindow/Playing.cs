@@ -220,7 +220,6 @@ namespace MainWindow
 
         private void bt_check_Click(object sender, EventArgs e)
         {
-            //======================лнфкхбн гюярнясбюрх CoR======================
             if (sudokuService.ValidateSudoku())
             {
                 int score = 0;
