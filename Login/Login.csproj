@@ -9,10 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\ChoosingSudoku\ChoosingSudoku.csproj" />
     <ProjectReference Include="..\Classes\Classes.csproj" />
   </ItemGroup>
 

@@ -42,7 +42,7 @@
             bt_backup.Name = "bt_backup";
             bt_backup.Size = new Size(120, 165);
             bt_backup.TabIndex = 0;
-            bt_backup.Text = "Повернутись до останнього збереження";
+            bt_backup.Text = "Back to the save";
             bt_backup.UseVisualStyleBackColor = true;
             bt_backup.Click += bt_backup_Click;
             // 
@@ -54,7 +54,7 @@
             bt_save.Name = "bt_save";
             bt_save.Size = new Size(118, 51);
             bt_save.TabIndex = 1;
-            bt_save.Text = "Зберегти";
+            bt_save.Text = "Save";
             bt_save.UseVisualStyleBackColor = true;
             bt_save.Click += bt_save_Click;
             // 
@@ -66,9 +66,9 @@
             bt_check.Name = "bt_check";
             bt_check.Size = new Size(118, 51);
             bt_check.TabIndex = 2;
-            bt_check.Text = "Закінчити (перевірити)";
+            bt_check.Text = "Finish (check)";
             bt_check.UseVisualStyleBackColor = true;
-            bt_check.Click += button3_Click;
+            bt_check.Click += bt_check_Click;
             // 
             // bt_start
             // 
@@ -77,7 +77,7 @@
             bt_start.Name = "bt_start";
             bt_start.Size = new Size(118, 51);
             bt_start.TabIndex = 3;
-            bt_start.Text = "Почати";
+            bt_start.Text = "Start";
             bt_start.UseVisualStyleBackColor = true;
             bt_start.Click += button4_Click;
             // 

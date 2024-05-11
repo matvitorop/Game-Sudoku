@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainWindow", "MainWindow\Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChoosingSudoku", "ChoosingSudoku\ChoosingSudoku.csproj", "{E7ED4B0B-CC6A-42DE-A5AD-C23A2207B297}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Login", "Login\Login.csproj", "{9F3EE432-B58F-4017-9269-3125572061CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{E7ED4B0B-CC6A-42DE-A5AD-C23A2207B297}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7ED4B0B-CC6A-42DE-A5AD-C23A2207B297}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7ED4B0B-CC6A-42DE-A5AD-C23A2207B297}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F3EE432-B58F-4017-9269-3125572061CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F3EE432-B58F-4017-9269-3125572061CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F3EE432-B58F-4017-9269-3125572061CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F3EE432-B58F-4017-9269-3125572061CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
