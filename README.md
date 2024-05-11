@@ -14,8 +14,9 @@ __Size of sudoku, that user can choose:__
 - 9x9 (classic)
 - 16x16
 ## Design patterns
-Main goal of this project was to use useful design patterns, programming principles and refactoring techniques. So in this project I used 5 design patterns, that useful in one place or another.
+Main goal of this project was to use useful design patterns, programming principles and refactoring techniques. Moreover, I tried to use patterns carefully, so that they do not overload the structure with unnecessary code. So in this project I used 5 design patterns, that useful in one place or another.
 ### Singleton
+I used `singleton pattern for objects, that must in one specimen`. So I used it for [SudokuService](./Classes/SudokuTypes/SudokuService.cs) as this class must have only one current sudoku that must be remaked in different times of program cycle. Also this pattern was useful for connection to database as a few connections can be harmful for code structure. So i placed connection to one class, that have only one specimen [DbManager](./Classes/MongoDB/DatabaseManager.cs). 
 ### Visitor
 ### Memento
 ### Chain of responsibility
