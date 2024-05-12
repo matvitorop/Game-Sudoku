@@ -46,3 +46,15 @@ All objects in my structure are creted with complience of idea, that one object 
 >I tried to make all elements of the program as simple and useful as possible, without unnecessary tools that would complicate the perception and understanding of the code.
 
 ## Refactoring techniques
+All techniques all useful, but it is impossible to argue for each one, because they were used during code creation and parallel refactoring.
+- Extract method
+- Extract variable
+- Inline Temp
+- Remove Assignments to Parameters
+- Substitution algorithm
+- Extract Class
+- Pull Up Constructor Body
+- Remove Parameter
+- Hide Method
+- Decompose Conditional
+- Consolidate Duplicate Conditional Fragments
