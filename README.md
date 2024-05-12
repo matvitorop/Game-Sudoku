@@ -26,4 +26,23 @@ This pattern was created mostly as experiment, but it also serves an `important 
 ### Abstract factory
 As in my program avaible different sudoku by difficulty and size, It incorrect to create different if...else method to create sudoku that user need. In my program, I made different factories like [EasyFactory](./Classes/Factory/EasyFactory.cs), that without linking to subclasses of sudoku, can creating different sudoku by size and complexity. This simplifies the code and makes it more compact without structure compaction.
 ## Programming principles
+Programming principles are musthave tool to make code structured and clean. So what exactly patterns did i apply?
+- Single responsibility
+
+All objects in my structure are creted with complience of idea, that one object is responsible for one task area. For example, [Base sudoku class](./Classes/SudokuTypes/Sudoku.cs) was `devided into sudoku and service` as sudoku class had too many methods and fields and performed different tasks as keeping data, generating sudoku, checking sudoku.
+- Open/closed
+> When creating objects, I adhered to the principle that in the future its functionality can be expanded, without changes to the old code and logic of the class.
+- Liskov substitution
+>Each of the child entities of the classes does not change the behavior, but only complements it. As example it can be [classes of returning factories](./Classes/CoR/ReturnHardFactory.cs).
+- Interface segregation
+>Mostly all fetures, that separated by groups of classes have their own interfaces, that give only required methods for implementation.
+- Dependency Inversion Principle
+>Higher-level modules should not directly depend on lower-level modules. `Sudoku factories` can be as example, due to they are working mostly with `base class sudoku`. 
+- YAGNI
+>In my program I created only required elements of structure, useless parts I replaced to folder [LikelyUseless](./LikelyUseless).
+- DRY
+>Repeatable code I made as methods to decrease an amount of code.
+- KISS
+>I tried to make all elements of the program as simple and useful as possible, without unnecessary tools that would complicate the perception and understanding of the code.
+
 ## Refactoring techniques
