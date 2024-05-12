@@ -46,7 +46,7 @@ All objects in my structure are creted with complience of idea, that one object 
 >I tried to make all elements of the program as simple and useful as possible, without unnecessary tools that would complicate the perception and understanding of the code.
 
 ## Refactoring techniques
-All techniques all useful, but it is impossible to argue for each one, because they were used during code creation and parallel refactoring.
+All techniques are useful, but it is impossible to argue for each one, because they were used during code creation and parallel refactoring.
 - Extract method
 - Extract variable
 - Inline Temp
