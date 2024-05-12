@@ -26,3 +26,4 @@ This pattern was created mostly as experiment, but it also serves an `important 
 ### Abstract factory
 As in my program avaible different sudoku by difficulty and size, It incorrect to create different if...else method to create sudoku that user need. In my program, I made different factories like [EasyFactory](./Classes/Factory/EasyFactory.cs), that without linking to subclasses of sudoku, can creating different sudoku by size and complexity. This simplifies the code and makes it more compact without structure compaction.
 ## Programming principles
+## Refactoring techniques
