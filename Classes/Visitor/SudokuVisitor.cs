@@ -32,19 +32,11 @@ namespace Classes.Visitor
             }
         }
 
-        public void SudokuPrep(SudokuSmall visitor)
+        public void SudokuPrep<T>(T visitor) where T : Sudoku
         {
             MakeCellsEmpty(visitor, visitor.fillingDensity);
         }
 
-        public void SudokuPrep(SudokuMedium visitor)
-        {
-            MakeCellsEmpty(visitor, visitor.fillingDensity);
-        }
 
-        public void SudokuPrep(SudokuBig visitor)
-        {
-            MakeCellsEmpty(visitor, visitor.fillingDensity);
-        }
     }
 }

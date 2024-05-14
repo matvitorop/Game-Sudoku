@@ -9,9 +9,7 @@ namespace Classes.Visitor
 {
     public interface IVisitor
     {
-        public void SudokuPrep(SudokuSmall visitor);
-        public void SudokuPrep(SudokuMedium visitor);
-        public void SudokuPrep(SudokuBig visitor);
-
+        void SudokuPrep<T>(T visitor) where T : Sudoku;
     }
+
 }
