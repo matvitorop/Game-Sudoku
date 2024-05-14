@@ -67,10 +67,17 @@ namespace Classes.MongoDB
             var allUsers = usersCollection.Find(_ => true).Project<User>(projection).ToList();
             return allUsers;
         }
+
+        private FilterDefinition<User> GetUserByFilter(User user)
+        {
+            return Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
+        }
+
+
         //updating fields
         public void UpdateScore(User user, int value)
         {
-            var filter = Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
+            var filter = GetUserByFilter(user);
 
             var update = Builders<User>
                 .Update
@@ -81,7 +88,7 @@ namespace Classes.MongoDB
 
         public void UpdateEasySudoku(User user)
         {
-            var filter = Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
+            var filter = GetUserByFilter(user);
 
             var update = Builders<User>
                 .Update
@@ -92,7 +99,7 @@ namespace Classes.MongoDB
 
         public void UpdateNormalSudoku(User user)
         {
-            var filter = Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
+            var filter = GetUserByFilter(user);
 
             var update = Builders<User>
                 .Update
@@ -103,7 +110,7 @@ namespace Classes.MongoDB
 
         public void UpdateHardSudoku(User user)
         {
-            var filter = Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
+            var filter = GetUserByFilter(user);
 
             var update = Builders<User>
                 .Update

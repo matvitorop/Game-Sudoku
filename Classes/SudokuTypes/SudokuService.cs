@@ -45,6 +45,10 @@ namespace Classes.SudokuTypes
         {
             FillRemaining();
         }
+        public int calculateStartIndex(int side)
+        {
+            return side / sudokuToChange.blockSize * sudokuToChange.blockSize; ;
+        }
 
         public bool IsValidInsert(int row, int col, int num)
         {
@@ -56,8 +60,8 @@ namespace Classes.SudokuTypes
                 }
             }
 
-            int startRow = row / sudokuToChange.blockSize * sudokuToChange.blockSize;
-            int startCol = col / sudokuToChange.blockSize * sudokuToChange.blockSize;
+            int startRow = calculateStartIndex(row);
+            int startCol = calculateStartIndex(col);
 
             for (int i = startRow; i < startRow + sudokuToChange.blockSize; i++)
             {
@@ -175,8 +179,8 @@ namespace Classes.SudokuTypes
                         }
                     }
 
-                    int startRow = row / sudokuToChange.blockSize * sudokuToChange.blockSize;
-                    int startCol = col / sudokuToChange.blockSize * sudokuToChange.blockSize;
+                    int startRow = calculateStartIndex(row);
+                    int startCol = calculateStartIndex(col);
 
                     for (int i = startRow; i < startRow + sudokuToChange.blockSize; i++)
                     {
