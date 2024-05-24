@@ -1,133 +1,136 @@
 using MainWindow;
 using Classes.MongoDB;
 using System.Windows.Forms;
-using System.Drawing.Design;
+
 namespace ChoosingSudoku
 {
     public partial class Form1 : Form
     {
-        string difficulty = "";
-        int size;
+        private string _difficulty = "";
+        private int _size;
 
-        User currentUser;
-        Form loginForm;
-        List<User> users;
-        public DatabaseManager dbMenager;
+        private User _currentUser;
+        private Form _loginForm;
+        private List<User> _users;
+        private readonly DatabaseManager _dbManager;
 
         public Form1()
         {
             InitializeComponent();
+            _dbManager = DatabaseManager.Instance;
         }
-        public Form1(Form loginForm, User user)
+
+        public Form1(Form loginForm, User user) : this()
         {
-            InitializeComponent();
-            dbMenager = DatabaseManager.Instance;
-            this.loginForm = loginForm;
-            this.currentUser = user;
+            _loginForm = loginForm;
+            _currentUser = user;
             UpdateUsers();
-
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void OnStartButtonClick(object sender, EventArgs e)
         {
-            //checking data and creating playground if variables are valid
-
-            if (difficulty != "" && size != 0)
+            if (IsValidSelection())
             {
-                Playing playWindow = new Playing(this, size, difficulty, currentUser);
+                var playWindow = new Playing(this, _size, _difficulty, _currentUser);
                 playWindow.Show();
-                this.Hide();
+                Hide();
             }
             else
             {
-                MessageBox.Show("Choose size and complexity mode of sudoku", "œÓÔÂÂ‰ÊÂÌÌˇ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ShowWarning("Choose size and complexity mode of sudoku");
             }
-
-        }
-        //radiobuttons, that initializing variables for next window
-        private void format_4_CheckedChanged(object sender, EventArgs e)
-        {
-            size = 4;
         }
 
-        private void format_9_CheckedChanged(object sender, EventArgs e)
+        private bool IsValidSelection()
         {
-            size = 9;
+            return !string.IsNullOrEmpty(_difficulty) && _size != 0;
         }
 
-        private void format_16_CheckedChanged(object sender, EventArgs e)
+        private void ShowWarning(string message)
         {
-            size = 16;
+            MessageBox.Show(message, "œÓÔÂÂ‰ÊÂÌÌˇ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        private void compl_easy_CheckedChanged(object sender, EventArgs e)
+        private void OnSizeCheckedChanged(object sender, EventArgs e)
         {
-            difficulty = "easy";
-        }
-
-        private void compl_med_CheckedChanged(object sender, EventArgs e)
-        {
-            difficulty = "normal";
-        }
-
-        private void compl_hard_CheckedChanged(object sender, EventArgs e)
-        {
-            difficulty = "hard";
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (loginForm != null)
+            if (sender is RadioButton radioButton && radioButton.Checked)
             {
-                loginForm.Show();
+                _size = int.Parse(radioButton.Tag.ToString());
             }
         }
 
-        private void dgw_Users_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void OnDifficultyCheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is RadioButton radioButton && radioButton.Checked)
+            {
+                _difficulty = radioButton.Tag.ToString();
+            }
+        }
+
+        private void OnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            _loginForm?.Show();
+        }
+
+        private void OnUserCellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                // getting object from list
-                User selectedUser = users[e.RowIndex];
-
-                // printing data to datagrid
-                MessageBox.Show($"Nickname: {selectedUser.Nickname}\n" +
-                                $"Hard Sudoku Count: {selectedUser.HardSudokuCount}\n" +
-                                $"Medium Sudoku Count: {selectedUser.NormalSudokuCount}\n" +
-                                $"Easy Sudoku Count: {selectedUser.EasySudokuCount}\n" +
-                                $"Total Score: {selectedUser.TotalScore}",
-                                "User",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                var selectedUser = _users[e.RowIndex];
+                ShowUserDetails(selectedUser);
             }
         }
 
-        private void Form1_VisibleChanged(object sender, EventArgs e)
+        private void ShowUserDetails(User user)
+        {
+            var message = $"Nickname: {user.Nickname}\n" +
+                          $"Hard Sudoku Count: {user.HardSudokuCount}\n" +
+                          $"Medium Sudoku Count: {user.NormalSudokuCount}\n" +
+                          $"Easy Sudoku Count: {user.EasySudokuCount}\n" +
+                          $"Total Score: {user.TotalScore}";
+            MessageBox.Show(message, "User", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void OnVisibleChanged(object sender, EventArgs e)
         {
             UpdateUsers();
         }
+
         private void UpdateUsers()
         {
-            //========================ÃŒ∆À»¬Œ “–≈¡¿ «Ã≈Õÿ»“» Œ¡'™Ã  Œƒ”========================
-            this.currentUser = dbMenager.AddOrGetUser(this.currentUser);
+            _currentUser = _dbManager.AddOrGetUser(_currentUser);
 
-            lb_NicknameRes.Text = currentUser.Nickname;
-            lb_EasySudokuRes.Text = currentUser.EasySudokuCount.ToString();
-            lb_NormalSudokuRes.Text = currentUser.NormalSudokuCount.ToString();
-            lb_HardSudokuRes.Text = currentUser.HardSudokuCount.ToString();
-            lb_scoreRes.Text = currentUser.TotalScore.ToString();
+            UpdateUserDetails(_currentUser);
 
-            users = dbMenager.GetAllUsersWithoutPassword();
+            _users = _dbManager.GetAllUsersWithoutPassword();
+            UpdateUserGrid(_users);
+        }
 
+        private void UpdateUserDetails(User user)
+        {
+            lb_NicknameRes.Text = user.Nickname;
+            lb_EasySudokuRes.Text = user.EasySudokuCount.ToString();
+            lb_NormalSudokuRes.Text = user.NormalSudokuCount.ToString();
+            lb_HardSudokuRes.Text = user.HardSudokuCount.ToString();
+            lb_scoreRes.Text = user.TotalScore.ToString();
+        }
+
+        private void UpdateUserGrid(List<User> users)
+        {
             if (users != null)
             {
                 dgw_Users.DataSource = users;
-                dgw_Users.Columns["Id"].Visible = false;
-                dgw_Users.Columns["Password"].Visible = false;
-                dgw_Users.Columns["HardSudokuCount"].Visible = false;
-                dgw_Users.Columns["NormalSudokuCount"].Visible = false;
-                dgw_Users.Columns["EasySudokuCount"].Visible = false;
+                HideUnnecessaryColumns(dgw_Users);
             }
+        }
+
+        private void HideUnnecessaryColumns(DataGridView dataGridView)
+        {
+            dataGridView.Columns["Id"].Visible = false;
+            dataGridView.Columns["Password"].Visible = false;
+            dataGridView.Columns["HardSudokuCount"].Visible = false;
+            dataGridView.Columns["NormalSudokuCount"].Visible = false;
+            dataGridView.Columns["EasySudokuCount"].Visible = false;
         }
     }
 }

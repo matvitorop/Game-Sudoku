@@ -69,7 +69,7 @@
             button1.TabIndex = 19;
             button1.Text = "Play";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            button1.Click += OnStartButtonClick;
             // 
             // compl_hard
             // 
@@ -81,7 +81,7 @@
             compl_hard.TabIndex = 18;
             compl_hard.Text = "Hard";
             compl_hard.UseVisualStyleBackColor = true;
-            compl_hard.CheckedChanged += compl_hard_CheckedChanged;
+            compl_hard.CheckedChanged += OnDifficultyCheckedChanged;
             // 
             // compl_med
             // 
@@ -93,7 +93,7 @@
             compl_med.TabIndex = 17;
             compl_med.Text = "Normal";
             compl_med.UseVisualStyleBackColor = true;
-            compl_med.CheckedChanged += compl_med_CheckedChanged;
+            compl_med.CheckedChanged += OnDifficultyCheckedChanged;
             // 
             // compl_easy
             // 
@@ -105,7 +105,7 @@
             compl_easy.TabIndex = 16;
             compl_easy.Text = "Easy";
             compl_easy.UseVisualStyleBackColor = true;
-            compl_easy.CheckedChanged += compl_easy_CheckedChanged;
+            compl_easy.CheckedChanged += OnDifficultyCheckedChanged;
             // 
             // format_16
             // 
@@ -117,7 +117,7 @@
             format_16.TabIndex = 15;
             format_16.Text = "16x16";
             format_16.UseVisualStyleBackColor = true;
-            format_16.CheckedChanged += format_16_CheckedChanged;
+            format_16.CheckedChanged += OnSizeCheckedChanged;
             // 
             // format_9
             // 
@@ -129,7 +129,7 @@
             format_9.TabIndex = 14;
             format_9.Text = "9x9";
             format_9.UseVisualStyleBackColor = true;
-            format_9.CheckedChanged += format_9_CheckedChanged;
+            format_9.CheckedChanged += OnSizeCheckedChanged;
             // 
             // format_4
             // 
@@ -141,7 +141,7 @@
             format_4.TabIndex = 13;
             format_4.Text = "4x4";
             format_4.UseVisualStyleBackColor = true;
-            format_4.CheckedChanged += format_4_CheckedChanged;
+            format_4.CheckedChanged += OnSizeCheckedChanged;
             // 
             // label3
             // 
@@ -214,7 +214,7 @@
             dgw_Users.Name = "dgw_Users";
             dgw_Users.Size = new Size(308, 227);
             dgw_Users.TabIndex = 23;
-            dgw_Users.CellContentClick += dgw_Users_CellContentClick;
+            dgw_Users.CellContentClick += OnUserCellContentClick;
             // 
             // lb_UserScore
             // 
@@ -359,8 +359,8 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "This is Sudoku!";
-            FormClosing += Form1_FormClosing;
-            VisibleChanged += Form1_VisibleChanged;
+            FormClosing += OnFormClosing;
+            VisibleChanged += OnVisibleChanged;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
