@@ -1,24 +1,13 @@
 ﻿using Classes.Factory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Classes.CoR
 {
     public class ReturnHardFactory : BaseHandler
     {
-        public override ISudokuFactory HandleRequest(string question)
+        public override ISudokuFactory? HandleRequest(Difficult difficult)
         {
-            if (question.Equals("hard"))
-            {
-                return new HardFactory();
-            }
-            else
-            {
-                return base.HandleRequest(question);
-            }
+            return difficult.Equals(Difficult.Hard) ? 
+                new HardFactory() : base.HandleRequest(difficult);
         }
     }
 }

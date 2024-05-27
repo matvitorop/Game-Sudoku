@@ -1,7 +1,3 @@
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using Classes;
 using Classes.CoR;
 using Classes.Factory;
 using Classes.Memento;
@@ -15,17 +11,17 @@ namespace MainWindow
     {
         private readonly Form choosingForm;
         private readonly int size;
-        private readonly string difficulty;
+        private readonly Difficult difficulty;
         private readonly User currentUser;
         private readonly DatabaseManager dbManager = DatabaseManager.Instance;
-        private ISudokuFactory sudokuFactory;
+        private ISudokuFactory? sudokuFactory;
         private Sudoku sudoku;
         private Button[,] buttons;
         private readonly SudokuService sudokuService = SudokuService.Instance;
         private readonly IVisitor visitor = new SudokuVisitor();
         private SudokuCaretaker sudokuSnapshots;
 
-        public Playing(Form form, int size, string difficulty, User currentUser)
+        public Playing(Form form, int size, Difficult difficulty, User currentUser)
         {
             InitializeComponent();
 
@@ -68,7 +64,7 @@ namespace MainWindow
             factoryOne.SetNextHandler(factoryTwo);
         }
 
-        private ISudokuFactory GetSudokuFactory(string difficulty)
+        private ISudokuFactory? GetSudokuFactory(Difficult difficult)
         {
             BaseHandler factoryOne = new ReturnEasyFactory();
             BaseHandler factoryTwo = new ReturnNormalFactory();
@@ -77,7 +73,7 @@ namespace MainWindow
             factoryTwo.SetNextHandler(factoryThree);
             factoryOne.SetNextHandler(factoryTwo);
 
-            return factoryOne.HandleRequest(difficulty);
+            return factoryOne.HandleRequest(difficult);
         }
 
         private void InitializeSudoku()
@@ -230,15 +226,15 @@ namespace MainWindow
             int score = 0;
             switch (difficulty)
             {
-                case "hard":
+                case Difficult.Easy:
                     score += 4;
                     dbManager.UpdateHardSudoku(currentUser);
                     break;
-                case "normal":
+                case Difficult.Normal:
                     score += 2;
                     dbManager.UpdateNormalSudoku(currentUser);
                     break;
-                case "easy":
+                case Difficult.Hard:
                     score += 1;
                     dbManager.UpdateEasySudoku(currentUser);
                     break;

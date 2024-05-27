@@ -1,12 +1,13 @@
 using MainWindow;
 using Classes.MongoDB;
 using System.Windows.Forms;
+using Classes.CoR;
 
 namespace ChoosingSudoku
 {
     public partial class Form1 : Form
     {
-        private string _difficulty = "";
+        private Difficult _difficulty;
         private int _size;
 
         private User _currentUser;
@@ -43,7 +44,7 @@ namespace ChoosingSudoku
 
         private bool IsValidSelection()
         {
-            return !string.IsNullOrEmpty(_difficulty) && _size != 0;
+            return !string.IsNullOrEmpty(_difficulty.ToString()) && _size != 0;
         }
 
         private void ShowWarning(string message)
@@ -63,7 +64,14 @@ namespace ChoosingSudoku
         {
             if (sender is RadioButton radioButton && radioButton.Checked)
             {
-                _difficulty = radioButton.Tag.ToString();
+                if (Enum.TryParse(radioButton.Tag.ToString(), out Difficult difficulty))
+                {
+                    _difficulty = difficulty;
+                }
+                else
+                {
+                    MessageBox.Show("Неправильне значення складності", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console", "Console\Console.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Classes", "Classes\Classes.csproj", "{0EC35D94-7BDC-48A6-B08D-177F74AA21A0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LikelyUseless", "LikelyUseless\LikelyUseless.csproj", "{F58FDD76-E360-462C-B73E-CD80B67A7786}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainWindow", "MainWindow\MainWindow.csproj", "{091B61C2-01D8-4E9C-910A-217E81278AE2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChoosingSudoku", "ChoosingSudoku\ChoosingSudoku.csproj", "{E7ED4B0B-CC6A-42DE-A5AD-C23A2207B297}"
@@ -29,10 +27,6 @@ Global
 		{0EC35D94-7BDC-48A6-B08D-177F74AA21A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EC35D94-7BDC-48A6-B08D-177F74AA21A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EC35D94-7BDC-48A6-B08D-177F74AA21A0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F58FDD76-E360-462C-B73E-CD80B67A7786}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F58FDD76-E360-462C-B73E-CD80B67A7786}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F58FDD76-E360-462C-B73E-CD80B67A7786}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F58FDD76-E360-462C-B73E-CD80B67A7786}.Release|Any CPU.Build.0 = Release|Any CPU
 		{091B61C2-01D8-4E9C-910A-217E81278AE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{091B61C2-01D8-4E9C-910A-217E81278AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{091B61C2-01D8-4E9C-910A-217E81278AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
