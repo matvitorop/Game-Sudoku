@@ -1,48 +1,27 @@
 ﻿using Classes.SudokuTypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Classes.Memento
 {
-    public class SudokuCaretaker
+    public class SudokuCaretaker(Sudoku sudoku)
     {
-        private Sudoku _sudoku;
-
-        private List<ISnapshot> mementos = new List<ISnapshot>();
-
-        public SudokuCaretaker(Sudoku sudoku)
-        {
-            this._sudoku = sudoku;
-        }
+        private readonly List<ISnapshot> _mementos = [];
 
         public void SaveBackup()
         {
-            mementos.Add(_sudoku.Save());
+            _mementos.Add(sudoku.Save());
         }
 
         public bool Restore()
         {
-            if (mementos.Any())
+            if (_mementos.Count != 0)
             {
-                var snapshot = mementos.Last();
-                _sudoku.Restore(snapshot);
-                mementos.Remove(snapshot);
+                var snapshot = _mementos.Last();
+                sudoku.Restore(snapshot);
+                _mementos.Remove(snapshot);
                 return true;
             }
-            else
-            {
-                return false;
-            }
-        }
 
-        public void ChangeSudoku(Sudoku sudoku) 
-        {
-            _sudoku = sudoku;
-            mementos.Clear();
+            return false;
         }
-
     }
 }

@@ -11,8 +11,8 @@ namespace Classes.SudokuTypes
     {
         public SudokuBig(int fillDense) : base(fillDense)
         {
-            sudokuTable = new int[16, 16];
-            blockSize = 4;
+            SudokuTable = new int[16, 16];
+            BlockSize = 4;
         }
         public override void Accept(IVisitor visitor)
         {

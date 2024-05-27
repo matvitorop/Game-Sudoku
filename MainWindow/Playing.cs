@@ -13,11 +13,11 @@ namespace MainWindow
         private readonly int size;
         private readonly Difficult difficulty;
         private readonly User currentUser;
-        private readonly DatabaseManager dbManager = DatabaseManager.Instance;
+        private readonly DatabaseManager? dbManager = DatabaseManager.Instance;
         private ISudokuFactory? sudokuFactory;
         private Sudoku sudoku;
         private Button[,] buttons;
-        private readonly SudokuService sudokuService = SudokuService.Instance;
+        private readonly SudokuService? sudokuService = SudokuService.Instance;
         private readonly IVisitor visitor = new SudokuVisitor();
         private SudokuCaretaker sudokuSnapshots;
 
@@ -184,7 +184,7 @@ namespace MainWindow
             int newValue = (currentValue % size) + 1;
 
             button.Text = newValue.ToString();
-            sudokuService.setSudokuNumber(x, y, newValue);
+            sudokuService.SetSudokuNumber(x, y, newValue);
         }
 
         private void bt_save_Click(object sender, EventArgs e)

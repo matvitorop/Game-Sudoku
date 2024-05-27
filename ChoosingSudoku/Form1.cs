@@ -13,7 +13,7 @@ namespace ChoosingSudoku
         private User _currentUser;
         private Form _loginForm;
         private List<User> _users;
-        private readonly DatabaseManager _dbManager;
+        private readonly DatabaseManager? _dbManager;
 
         public Form1()
         {
