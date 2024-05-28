@@ -1,33 +1,26 @@
 ﻿using Classes.Factory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Classes.CoR
 {
     public abstract class BaseHandler : IHandler
     {
-        protected IHandler? NextHandler;
+        private IHandler? _nextHandler;
 
         public void SetNextHandler(IHandler handler)
         {
-            NextHandler = handler;
+            _nextHandler = handler;
         }
 
-        public virtual ISudokuFactory HandleRequest(string question)
+        public virtual ISudokuFactory? HandleRequest(Difficult difficult)
         {
-            if (NextHandler != null)
-            {
-                return NextHandler.HandleRequest(question);
-            }
-            else
-            {
-                return null;
-            }
-
+            return _nextHandler?.HandleRequest(difficult);
         }
+    }
+    
+    public enum Difficult
+    {
+        Easy,
+        Normal,
+        Hard
     }
 }

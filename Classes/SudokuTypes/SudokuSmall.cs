@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Classes.Visitor;
+﻿using Classes.Visitor;
 
 namespace Classes.SudokuTypes
 {
@@ -11,8 +6,8 @@ namespace Classes.SudokuTypes
     {
         public SudokuSmall(int fillDense) : base(fillDense)
         {
-            sudokuTable = new int[4, 4];
-            blockSize = 2;
+            SudokuTable = new int[4, 4];
+            BlockSize = 2;
         }
         public override void Accept(IVisitor visitor)
         {

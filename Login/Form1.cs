@@ -5,7 +5,7 @@ namespace Login
 {
     public partial class Form1 : Form
     {
-        private readonly DatabaseManager _dbManager;
+        private readonly DatabaseManager? _dbManager;
 
         public Form1()
         {

@@ -1,19 +1,13 @@
-﻿using Classes.SudokuTypes;
-using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MongoDB.Driver;
 
 namespace Classes.MongoDB
 {
     public class DatabaseManager
     {
         //singleton db connection
-        private static DatabaseManager _instance;
+        private static DatabaseManager? _instance;
         
-        private readonly IMongoCollection<User> usersCollection;
+        private readonly IMongoCollection<User> _usersCollection;
 
         //connecting
         private DatabaseManager()
@@ -23,10 +17,10 @@ namespace Classes.MongoDB
             IMongoDatabase database = client.GetDatabase("Sudoku-Users");
 
             
-            usersCollection = database.GetCollection<User>("Users");
+            _usersCollection = database.GetCollection<User>("Users");
         }
         //current Manager
-        public static DatabaseManager Instance
+        public static DatabaseManager? Instance
         {
             get
             {
@@ -41,7 +35,7 @@ namespace Classes.MongoDB
         public User AddOrGetUser(User user)
         {
             var filterByUsername = Builders<User>.Filter.Eq(u => u.Nickname, user.Nickname);
-            var existingUser = usersCollection.Find(filterByUsername).FirstOrDefault();
+            var existingUser = _usersCollection.Find(filterByUsername).FirstOrDefault();
 
             if (existingUser != null)
             {
@@ -49,22 +43,18 @@ namespace Classes.MongoDB
                 {
                     return existingUser;
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
-            else
-            {
-                usersCollection.InsertOne(user);
-                return user;
-            }
+
+            _usersCollection.InsertOne(user);
+            return user;
         }
         //getting all users without password
         public List<User> GetAllUsersWithoutPassword()
         {
             var projection = Builders<User>.Projection.Exclude(u => u.Password);
-            var allUsers = usersCollection.Find(_ => true).Project<User>(projection).ToList();
+            var allUsers = _usersCollection.Find(_ => true).Project<User>(projection).ToList();
             return allUsers;
         }
 
@@ -83,7 +73,7 @@ namespace Classes.MongoDB
                 .Update
                 .Inc(a => a.TotalScore, value);
 
-            usersCollection.UpdateOne(filter, update);
+            _usersCollection.UpdateOne(filter, update);
         }
 
         public void UpdateEasySudoku(User user)
@@ -94,7 +84,7 @@ namespace Classes.MongoDB
                 .Update
                 .Inc(a => a.EasySudokuCount, 1);
 
-            usersCollection.UpdateOne(filter, update);
+            _usersCollection.UpdateOne(filter, update);
         }
 
         public void UpdateNormalSudoku(User user)
@@ -105,7 +95,7 @@ namespace Classes.MongoDB
                 .Update
                 .Inc(a => a.NormalSudokuCount, 1);
 
-            usersCollection.UpdateOne(filter, update);
+            _usersCollection.UpdateOne(filter, update);
         }
 
         public void UpdateHardSudoku(User user)
@@ -116,7 +106,7 @@ namespace Classes.MongoDB
                 .Update
                 .Inc(a => a.HardSudokuCount, 1);
 
-            usersCollection.UpdateOne(filter, update);
+            _usersCollection.UpdateOne(filter, update);
         }
     }
 }
